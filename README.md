@@ -1,3 +1,3 @@
 # Space-for-CSharp-development
 Repository for homeworks and tests in SPbU in the second+ semesters. Development on C#
-![example workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+![CI](https://github.com/YuriUfimtsev/Space-for-CSharp-development/blob/main/.github/workflows/CI.yml/badge.svg)
