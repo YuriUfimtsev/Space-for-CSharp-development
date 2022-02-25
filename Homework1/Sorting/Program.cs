@@ -1,11 +1,15 @@
-﻿using System;
-
-namespace Sorting
+﻿namespace Sorting
 {
     internal class Program
     {
         private static int Main(string[] args)
         {
+            if (!AreTestsCorrect())
+            {
+                Console.WriteLine("Tests failed");
+                return -1;
+            }
+
             Console.Write("Enter elements of array: ");
             var sequenceOfNumbers = Console.ReadLine();
             if (sequenceOfNumbers == null)
@@ -51,6 +55,35 @@ namespace Sorting
                     --j;
                 }
             }
+        }
+
+        private static bool StandartTest()
+        {
+            int[] arrayForStandartTest = { 1, 5, 8, 0, 2 };
+            SortByInsertion(arrayForStandartTest);
+            int[] resultArray = { 0, 1, 2, 5, 8 };
+            return Enumerable.SequenceEqual(resultArray, arrayForStandartTest);
+        }
+
+        private static bool ReverseSortingTest()
+        {
+            int[] arrayForStandartTest = { 5, 4, 3, 2, 1 };
+            SortByInsertion(arrayForStandartTest);
+            int[] resultArray = { 1, 2, 3, 4, 5 };
+            return Enumerable.SequenceEqual(arrayForStandartTest, resultArray);
+        }
+
+        private static bool TestWithEqualElements()
+        {
+            int[] arrayForStandartTest = { 1, 8, 1 };
+            SortByInsertion(arrayForStandartTest);
+            int[] resultArray = { 1, 1, 8 };
+            return Enumerable.SequenceEqual(arrayForStandartTest, resultArray);
+        }
+
+        private static bool AreTestsCorrect()
+        {
+            return TestWithEqualElements() && ReverseSortingTest() && StandartTest();
         }
     }
 }
