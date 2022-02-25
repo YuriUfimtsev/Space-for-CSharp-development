@@ -2,22 +2,31 @@
 
 namespace Sorting
 {
-    class Program
+    internal class Program
     {
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
-            Console.WriteLine("Enter elements of array: ");
+            Console.Write("Enter elements of array: ");
             var sequenceOfNumbers = Console.ReadLine();
             if (sequenceOfNumbers == null)
             {
                 Console.WriteLine("No elements for sorting");
                 return 0;
             }
-            int[] arrayOfNumbers = makeArrayFromString(sequenceOfNumbers);
 
+            int[] arrayOfNumbers = MakeArrayFromString(sequenceOfNumbers);
+            SortByInsertion(arrayOfNumbers);
+            Console.Write("Sorted array: ");
+            for (var i = 0; i < arrayOfNumbers.Length; i++)
+            {
+                Console.Write(arrayOfNumbers[i] + " ");
+            }
+
+            Console.WriteLine();
             return 0;
         }
-        static int[] makeArrayFromString(string sequenceOfNumbers)
+
+        private static int[] MakeArrayFromString(string sequenceOfNumbers)
         {
             string[] stringArrayOfNumbers = sequenceOfNumbers.Split(' ');
             int[] intArrayOfNumbers = new int[stringArrayOfNumbers.Length];
@@ -25,11 +34,23 @@ namespace Sorting
             {
                 intArrayOfNumbers[i] = int.Parse(stringArrayOfNumbers[i]);
             }
+
             return intArrayOfNumbers;
         }
-        static void sortByInsertion(int[] arrayForSorting)
+
+        private static void SortByInsertion(int[] arrayForSorting)
         {
-            
+            for (var i = 1; i < arrayForSorting.Length; ++i)
+            {
+                var j = i;
+                while (j >= 1 && arrayForSorting[j - 1] > arrayForSorting[j])
+                {
+                    var buffer = arrayForSorting[j - 1];
+                    arrayForSorting[j - 1] = arrayForSorting[j];
+                    arrayForSorting[j] = buffer;
+                    --j;
+                }
+            }
         }
     }
 }
