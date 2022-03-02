@@ -1,6 +1,14 @@
 ﻿namespace BurrowsWheelerTransform;
+
+/// <summary>
+/// Класс содержит методы, которые тестируют Direct and Reverse BWT.
+/// </summary>
 internal class TestsForBWT
 {
+    /// <summary>
+    /// Метод проверяет корректность выполнения всех тестов.
+    /// </summary>
+    /// <returns> true, если тесты прошли успешно. false иначе. </returns>
     internal static bool AreTestsPassing()
     {
         return TestWithNonrepeatingSymbols() && TestWithRussianAndRepeatingSymbols() && TestWithOneSymbol();

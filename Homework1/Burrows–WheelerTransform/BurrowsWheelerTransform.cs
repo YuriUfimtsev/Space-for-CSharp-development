@@ -1,7 +1,15 @@
 ﻿namespace BurrowsWheelerTransform;
 
+/// <summary>
+/// Класс реализует прямое и обратное преобразования BurrowsWheelerTransformation.
+/// </summary>
 internal static class BurrowsWheelerTransform
 {
+    /// <summary>
+    /// Метод выполняет прямое преобразование BWT.
+    /// </summary>
+    /// <param name="stringForDirectBWT"> Принимает на вход строку, которую нужно преобразовать. </param>
+    /// <returns> Возвращает преобразованную строку и позицию конца исходной строки. </returns>
     internal static (string ResultString, int EndStringPosition) DirectBWT(string stringForDirectBWT)
     {
         var endStringPosition = stringForDirectBWT.Length - 1;
@@ -29,6 +37,12 @@ internal static class BurrowsWheelerTransform
         return (resultString, endStringPosition);
     }
 
+    /// <summary>
+    /// Метод реализует обратное преобразование BWT.
+    /// </summary>
+    /// <param name="stringForReverseBWT"> Принимает строку для обратного преобразования. </param>
+    /// <param name="endStringPosition"> Принимает на вход позицию конца преобразованной строки. </param>
+    /// <returns> Возвращает преобразованную строку. </returns>
     internal static string ReverseBWT(string stringForReverseBWT, int endStringPosition)
     {
         var arrayWithSortedStringElements = stringForReverseBWT.ToCharArray();
