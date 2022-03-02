@@ -2,43 +2,7 @@
 
 internal static class BurrowsWheelerTransform
 {
-    private static int Main(string[] args)
-    {
-        // if (!AreTestsPassed())
-        // {
-        //    Console.WriteLine("Tests failed");
-        //    return -1;
-        // }
-        Console.WriteLine("Enter the string for Burrows-Wheeler transform");
-        var stringForBWT = Console.ReadLine();
-        Console.WriteLine("Enter the correct number:\n 1 if you want to execute direct Burrows-Wheeler transform\n"
-            + " 2 if you want to execute reverse Burrows-Wheeler transform");
-        var keyForBWT = Console.ReadLine();
-        if ((string.Compare(keyForBWT, "1") != 0 && string.Compare(keyForBWT, "2") != 0) || stringForBWT == null)
-        {
-            Console.WriteLine("Incorrect input.");
-            return -1;
-        }
-
-        switch (keyForBWT)
-        {
-            case "1":
-                var (directTransformedString, directEndStringPosition) = DirectBWT(stringForBWT);
-                Console.WriteLine($"Transformed string: {directTransformedString}," +
-                    $" end string position (counting from 0): {directEndStringPosition}");
-                break;
-            case "2":
-                Console.WriteLine("Enter the end string position for Burrows-Wheeler transform (enter the number): ");
-                var reverseEndStringPosition = Convert.ToInt32(Console.ReadLine());
-                var reverseTransformedString = ReverseBWT(stringForBWT, reverseEndStringPosition);
-                Console.WriteLine($"Transformed string: {reverseTransformedString}");
-                break;
-        }
-
-        return 0;
-    }
-
-    private static (string ResultString, int EndStringPosition) DirectBWT(string stringForDirectBWT)
+    internal static (string ResultString, int EndStringPosition) DirectBWT(string stringForDirectBWT)
     {
         var endStringPosition = stringForDirectBWT.Length - 1;
         var arrayOfSuffixes = new int[stringForDirectBWT.Length];
@@ -65,7 +29,7 @@ internal static class BurrowsWheelerTransform
         return (resultString, endStringPosition);
     }
 
-    private static string ReverseBWT(string stringForReverseBWT, int endStringPosition)
+    internal static string ReverseBWT(string stringForReverseBWT, int endStringPosition)
     {
         var arrayWithSortedStringElements = stringForReverseBWT.ToCharArray();
         Array.Sort(arrayWithSortedStringElements);
@@ -102,6 +66,43 @@ internal static class BurrowsWheelerTransform
         }
 
         return resultString;
+    }
+
+    private static int Main(string[] args)
+    {
+        if (!TestsForBWT.AreTestsPassing())
+        {
+            Console.WriteLine("Tests failed");
+            return -1;
+        }
+
+        Console.WriteLine("Enter the string for Burrows-Wheeler transform");
+        var stringForBWT = Console.ReadLine();
+        Console.WriteLine("Enter the correct number:\n 1 if you want to execute direct Burrows-Wheeler transform\n"
+            + " 2 if you want to execute reverse Burrows-Wheeler transform");
+        var keyForBWT = Console.ReadLine();
+        if ((string.Compare(keyForBWT, "1") != 0 && string.Compare(keyForBWT, "2") != 0) || stringForBWT == null)
+        {
+            Console.WriteLine("Incorrect input.");
+            return -1;
+        }
+
+        switch (keyForBWT)
+        {
+            case "1":
+                var (directTransformedString, directEndStringPosition) = DirectBWT(stringForBWT);
+                Console.WriteLine($"Transformed string: {directTransformedString}," +
+                    $" end string position (counting from 0): {directEndStringPosition}");
+                break;
+            case "2":
+                Console.WriteLine("Enter the end string position for Burrows-Wheeler transform (enter the number): ");
+                var reverseEndStringPosition = Convert.ToInt32(Console.ReadLine());
+                var reverseTransformedString = ReverseBWT(stringForBWT, reverseEndStringPosition);
+                Console.WriteLine($"Transformed string: {reverseTransformedString}");
+                break;
+        }
+
+        return 0;
     }
 
     private static void SortByInsertionForSuffixesArray(int[] suffixesArray, string basicString)
