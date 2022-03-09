@@ -1,4 +1,6 @@
-﻿namespace StackCalculator;
+﻿using System;
+
+namespace StackCalculator;
 
 class StackOnList : IStack
 {
@@ -9,7 +11,7 @@ class StackOnList : IStack
         get { return head.Size; }
     }
 
-    public void Push(int value)
+    public void Push(float value)
     {
         StackElement newStackElement = new();
         newStackElement.Value = value;
@@ -18,13 +20,13 @@ class StackOnList : IStack
         ++head.Size;
     }
 
-    public (int returningValue, bool isStackEmpty) Pop()
+    public (float returningValue, bool isStackEmpty) Pop()
     {
         if (head.NextElement == null)
         {
             return (0, true);
         }
-        int value = head.Value;
+        float value = head.Value;
         head = head.NextElement;
         --head.Size;
         return (value, false);
@@ -35,7 +37,7 @@ class StackOnList : IStack
         return head.NextElement == null;
     }
 
-    public (int returningValue, bool isStackEmpty) Top()
+    public (float returningValue, bool isStackEmpty) Top()
     {
         if (head.NextElement == null)
         {
@@ -44,9 +46,9 @@ class StackOnList : IStack
         return (head.Value, false);
     }
 
-    internal class StackElement
+    public class StackElement
     {
-        private int value;
+        private float value;
         private StackElement? nextElement;
         private int size;
 
@@ -57,7 +59,7 @@ class StackOnList : IStack
             this.size = 0;
         }
 
-        internal int Value
+        internal float Value
         {
             get
             {

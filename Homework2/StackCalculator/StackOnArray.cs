@@ -4,21 +4,25 @@ namespace StackCalculator;
 
 internal class StackOnArray : IStack
 {
-    private int[] arrayWithElements;
+    private float[] arrayWithElements;
     private int indexOfArray;
 
     public int GetSize
     {
         get { return indexOfArray; }
     }
+    internal float[] GetArrayWithElemments
+    {
+        get { return arrayWithElements; }
+    }
 
     public StackOnArray()
     {
         this.indexOfArray = 0;
-        this.arrayWithElements = new int[10];
+        this.arrayWithElements = new float[10];
     }
 
-    public void Push(int value)
+    public void Push(float value)
     {
         if (indexOfArray == arrayWithElements.Length)
         {
@@ -29,14 +33,14 @@ internal class StackOnArray : IStack
         ++indexOfArray;
     }
 
-    public (int returningValue, bool isStackEmpty) Pop()
+    public (float returningValue, bool isStackEmpty) Pop()
     {
         if (indexOfArray == 0)
         {
             return (0, true);
         }
 
-        int value = arrayWithElements[indexOfArray];
+        float value = arrayWithElements[indexOfArray];
         arrayWithElements[indexOfArray - 1] = 0;
         --indexOfArray;
         return (value, false);
@@ -46,7 +50,7 @@ internal class StackOnArray : IStack
     {
         return indexOfArray == 0;
     }
-    public (int returningValue, bool isStackEmpty) Top()
+    public (float returningValue, bool isStackEmpty) Top()
     {
         if (indexOfArray == 0)
         {
@@ -57,9 +61,9 @@ internal class StackOnArray : IStack
     }
 
 
-    internal int[] Resize(int newLength)
+    internal float[] Resize(int newLength)
     {
-        var newArray = new int[newLength];
+        var newArray = new float[newLength];
         for (int i = 0; i < arrayWithElements.Length; ++i)
         {
             newArray[i] = arrayWithElements[i];
@@ -67,5 +71,4 @@ internal class StackOnArray : IStack
 
         return newArray;
     }
-
 }

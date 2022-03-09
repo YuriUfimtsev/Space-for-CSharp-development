@@ -3,11 +3,11 @@
 namespace StackCalculator;
 internal interface IStack
 {
-    void Push(int value);
+    void Push(float value);
 
-    (int returningValue, bool isStackEmpty) Pop();
+    (float returningValue, bool isStackEmpty) Pop();
 
-    (int returningValue, bool isStackEmpty) Top();
+    (float returningValue, bool isStackEmpty) Top();
 
     int GetSize { get; }
 
