@@ -2,27 +2,43 @@
 
 using System;
 
+/// <summary>
+/// Struct stack based on array.
+/// </summary>
 internal class StackOnArray : IStack
 {
     private float[] arrayWithElements;
     private int indexOfArray;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StackOnArray"/> class.
+    /// </summary>
     public StackOnArray()
     {
         this.indexOfArray = 0;
         this.arrayWithElements = new float[10];
     }
 
+    /// <summary>
+    /// Gets the size of stack.
+    /// </summary>
     public int GetSize
     {
         get { return this.indexOfArray; }
     }
 
-    internal float[] GetArrayWithElemments
+    /// <summary>
+    /// Gets the stack's array.
+    /// </summary>
+    internal float[] GetArrayWithElements
     {
         get { return this.arrayWithElements; }
     }
 
+    /// <summary>
+    /// Method adds the element in stack.
+    /// </summary>
+    /// <param name="value">Element that you want to push.</param>
     public void Push(float value)
     {
         if (this.indexOfArray == this.arrayWithElements.Length)
@@ -34,6 +50,10 @@ internal class StackOnArray : IStack
         ++this.indexOfArray;
     }
 
+    /// <summary>
+    /// Method gets the element from stack.
+    /// </summary>
+    /// <returns>value from stack. Also true if stack is not empty and pop was correct. Else false.</returns>
     public (float ReturningValue, bool IsStackNotEmpty) Pop()
     {
         if (this.indexOfArray == 0)
@@ -47,11 +67,19 @@ internal class StackOnArray : IStack
         return (value, true);
     }
 
+    /// <summary>
+    /// Method checks if stack is empty.
+    /// </summary>
+    /// <returns>true if stack is empty. Else false.</returns>
     public bool IsEmpty()
     {
         return this.indexOfArray == 0;
     }
 
+    /// <summary>
+    /// Method view the last stack element, but don't pop it.
+    /// </summary>
+    /// <returns>value from stack. Also true if stack is not empty. Else false.</returns>
     public (float ReturningValue, bool IsStackNotEmpty) Top()
     {
         if (this.indexOfArray == 0)
@@ -62,7 +90,7 @@ internal class StackOnArray : IStack
         return (this.arrayWithElements[this.indexOfArray - 1], true);
     }
 
-    internal float[] Resize(int newLength)
+    private float[] Resize(int newLength)
     {
         var newArray = new float[newLength];
         for (int i = 0; i < this.arrayWithElements.Length; ++i)

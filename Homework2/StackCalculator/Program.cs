@@ -1,7 +1,11 @@
 ﻿namespace StackCalculator;
+
+/// <summary>
+/// Class contains Main method.
+/// </summary>
 internal class Program
 {
-    public static void Main(string[] args)
+    private static void Main(string[] args)
     {
         Console.WriteLine("Enter the string, that you want to calculate (in postfix form):");
         var stringForCalculator = Console.ReadLine();

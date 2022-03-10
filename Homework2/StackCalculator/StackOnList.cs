@@ -2,15 +2,25 @@
 
 using System;
 
+/// <summary>
+/// Struct stack based on list.
+/// </summary>
 internal class StackOnList : IStack
 {
     private StackElement head = new();
 
+    /// <summary>
+    /// Gets the size of stack.
+    /// </summary>
     public int GetSize
     {
         get { return this.head.Size; }
     }
 
+    /// <summary>
+    /// Method adds the element in stack.
+    /// </summary>
+    /// <param name="value">Element that you want to push.</param>
     public void Push(float value)
     {
         StackElement newStackElement = new();
@@ -20,6 +30,10 @@ internal class StackOnList : IStack
         ++this.head.Size;
     }
 
+    /// <summary>
+    /// Method gets the element from stack.
+    /// </summary>
+    /// <returns>value from stack. Also true if stack is not empty and pop was correct. Else false.</returns>
     public (float ReturningValue, bool IsStackNotEmpty) Pop()
     {
         if (this.head.NextElement == null)
@@ -33,11 +47,19 @@ internal class StackOnList : IStack
         return (value, true);
     }
 
+    /// <summary>
+    /// Method checks if stack is empty.
+    /// </summary>
+    /// <returns>true if stack is empty. Else false.</returns>
     public bool IsEmpty()
     {
         return this.head.NextElement == null;
     }
 
+    /// <summary>
+    /// Method view the last stack element, but don't pop it.
+    /// </summary>
+    /// <returns>value from stack. Also true if stack is not empty. Else false.</returns>
     public (float ReturningValue, bool IsStackNotEmpty) Top()
     {
         if (this.head.NextElement == null)
@@ -48,7 +70,7 @@ internal class StackOnList : IStack
         return (this.head.Value, true);
     }
 
-    public class StackElement
+    private class StackElement
     {
         private float value;
         private StackElement? nextElement;
