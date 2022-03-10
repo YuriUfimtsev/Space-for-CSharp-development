@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace StackCalculator;
+﻿namespace StackCalculator;
 internal class Program
 {
     public static void Main(string[] args)
@@ -20,6 +18,7 @@ internal class Program
         if (!checkOfCorrectWorkForStackOnArray)
         {
             Console.WriteLine("Incorrect string. Try again :)");
+            return;
         }
 
         Console.WriteLine($"Result from calculator with stack on array: {resultOnStackOnArray};");
@@ -31,6 +30,7 @@ internal class Program
         if (!checkOfCorrectWorkForStackOnList)
         {
             Console.WriteLine("Incorrect string. Try again :)");
+            return;
         }
 
         Console.WriteLine($"Result from calculator with stack on list: {resultOnStackOnList}.");

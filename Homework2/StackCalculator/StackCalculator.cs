@@ -1,6 +1,7 @@
-﻿using System;
+﻿namespace StackCalculator;
 
-namespace StackCalculator;
+using System;
+
 internal class StackCalculator
 {
     private IStack? newStack;
@@ -8,7 +9,7 @@ internal class StackCalculator
     internal StackCalculator(IStack stack)
        => this.newStack = stack;
 
-    public (float result, bool checkOfCorrectWork) CalculateInPostfixForm(string commandSequence)
+    public (float Result, bool CheckOfCorrectWork) CalculateInPostfixForm(string commandSequence)
     {
         var arrayOfNumbersAndOperators = commandSequence.Split();
         var checkOfCorrectWork = true;
@@ -17,8 +18,8 @@ internal class StackCalculator
             if (arrayOfNumbersAndOperators[i] == "*" || arrayOfNumbersAndOperators[i] == "/"
             || arrayOfNumbersAndOperators[i] == "+" || arrayOfNumbersAndOperators[i] == "-")
             {
-                (var firstElement, checkOfCorrectWork) = newStack!.Pop();
-                (var secondElement, checkOfCorrectWork) = newStack.Pop();
+                (var firstElement, checkOfCorrectWork) = this.newStack!.Pop();
+                (var secondElement, checkOfCorrectWork) = this.newStack.Pop();
                 if (!checkOfCorrectWork)
                 {
                     return (0, false);
@@ -31,11 +32,15 @@ internal class StackCalculator
                         middleResult = firstElement * secondElement;
                         break;
                     case "/":
-                        if (firstElement.Equals((float)0))
+                        if (Math.Abs(firstElement) > 0.000000001)
+                        {
+                            middleResult = secondElement / firstElement;
+                        }
+                        else
                         {
                             return (0, false);
                         }
-                        middleResult = secondElement / firstElement;
+
                         break;
                     case "-":
                         middleResult = secondElement - firstElement;
@@ -46,16 +51,17 @@ internal class StackCalculator
                     default:
                         break;
                 }
-                newStack.Push(middleResult);
+
+                this.newStack.Push(middleResult);
             }
             else
             {
-                newStack!.Push(float.Parse(arrayOfNumbersAndOperators[i]));
+                this.newStack!.Push(float.Parse(arrayOfNumbersAndOperators[i]));
             }
         }
 
-        (float finalResult, checkOfCorrectWork) = newStack!.Pop();
-        if (!newStack.IsEmpty() || !checkOfCorrectWork)
+        (float finalResult, checkOfCorrectWork) = this.newStack!.Pop();
+        if (!this.newStack.IsEmpty() || !checkOfCorrectWork)
         {
             return (0, false);
         }
@@ -63,4 +69,3 @@ internal class StackCalculator
         return (finalResult, true);
     }
 }
-

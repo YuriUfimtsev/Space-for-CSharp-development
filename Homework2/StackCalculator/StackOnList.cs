@@ -1,49 +1,51 @@
-﻿using System;
+﻿namespace StackCalculator;
 
-namespace StackCalculator;
+using System;
 
-class StackOnList : IStack
+internal class StackOnList : IStack
 {
     private StackElement head = new();
 
     public int GetSize
     {
-        get { return head.Size; }
+        get { return this.head.Size; }
     }
 
     public void Push(float value)
     {
         StackElement newStackElement = new();
         newStackElement.Value = value;
-        newStackElement.NextElement = head;
-        head = newStackElement;
-        ++head.Size;
+        newStackElement.NextElement = this.head;
+        this.head = newStackElement;
+        ++this.head.Size;
     }
 
-    public (float returningValue, bool isStackNotEmpty) Pop()
+    public (float ReturningValue, bool IsStackNotEmpty) Pop()
     {
-        if (head.NextElement == null)
+        if (this.head.NextElement == null)
         {
             return (0, false);
         }
-        float value = head.Value;
-        head = head.NextElement;
-        --head.Size;
+
+        float value = this.head.Value;
+        this.head = this.head.NextElement;
+        --this.head.Size;
         return (value, true);
     }
 
     public bool IsEmpty()
     {
-        return head.NextElement == null;
+        return this.head.NextElement == null;
     }
 
-    public (float returningValue, bool isStackNotEmpty) Top()
+    public (float ReturningValue, bool IsStackNotEmpty) Top()
     {
-        if (head.NextElement == null)
+        if (this.head.NextElement == null)
         {
             return (0, false);
         }
-        return (head.Value, true);
+
+        return (this.head.Value, true);
     }
 
     public class StackElement

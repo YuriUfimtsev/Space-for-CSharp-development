@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace StackCalculator;
+﻿namespace StackCalculator;
 internal interface IStack
 {
+    int GetSize { get; }
+
     void Push(float value);
 
-    (float returningValue, bool isStackNotEmpty) Pop();
+    (float ReturningValue, bool IsStackNotEmpty) Pop();
 
-    (float returningValue, bool isStackNotEmpty) Top();
-
-    int GetSize { get; }
+    (float ReturningValue, bool IsStackNotEmpty) Top();
 
     bool IsEmpty();
 }

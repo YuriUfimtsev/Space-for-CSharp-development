@@ -1,20 +1,11 @@
-﻿using System;
+﻿namespace StackCalculator;
 
-namespace StackCalculator;
+using System;
 
 internal class StackOnArray : IStack
 {
     private float[] arrayWithElements;
     private int indexOfArray;
-
-    public int GetSize
-    {
-        get { return indexOfArray; }
-    }
-    internal float[] GetArrayWithElemments
-    {
-        get { return arrayWithElements; }
-    }
 
     public StackOnArray()
     {
@@ -22,51 +13,61 @@ internal class StackOnArray : IStack
         this.arrayWithElements = new float[10];
     }
 
-    public void Push(float value)
+    public int GetSize
     {
-        if (indexOfArray == arrayWithElements.Length)
-        {
-            arrayWithElements = Resize(arrayWithElements.Length * 2);
-        }
-
-        arrayWithElements[indexOfArray] = value;
-        ++indexOfArray;
+        get { return this.indexOfArray; }
     }
 
-    public (float returningValue, bool isStackNotEmpty) Pop()
+    internal float[] GetArrayWithElemments
     {
-        if (indexOfArray == 0)
+        get { return this.arrayWithElements; }
+    }
+
+    public void Push(float value)
+    {
+        if (this.indexOfArray == this.arrayWithElements.Length)
+        {
+            this.arrayWithElements = this.Resize(this.arrayWithElements.Length * 2);
+        }
+
+        this.arrayWithElements[this.indexOfArray] = value;
+        ++this.indexOfArray;
+    }
+
+    public (float ReturningValue, bool IsStackNotEmpty) Pop()
+    {
+        if (this.indexOfArray == 0)
         {
             return (0, false);
         }
 
-        float value = arrayWithElements[indexOfArray - 1];
-        arrayWithElements[indexOfArray - 1] = 0;
-        --indexOfArray;
+        float value = this.arrayWithElements[this.indexOfArray - 1];
+        this.arrayWithElements[this.indexOfArray - 1] = 0;
+        --this.indexOfArray;
         return (value, true);
     }
 
     public bool IsEmpty()
     {
-        return indexOfArray == 0;
+        return this.indexOfArray == 0;
     }
-    public (float returningValue, bool isStackNotEmpty) Top()
+
+    public (float ReturningValue, bool IsStackNotEmpty) Top()
     {
-        if (indexOfArray == 0)
+        if (this.indexOfArray == 0)
         {
             return (0, false);
         }
 
-        return (arrayWithElements[indexOfArray - 1], true);
+        return (this.arrayWithElements[this.indexOfArray - 1], true);
     }
-
 
     internal float[] Resize(int newLength)
     {
         var newArray = new float[newLength];
-        for (int i = 0; i < arrayWithElements.Length; ++i)
+        for (int i = 0; i < this.arrayWithElements.Length; ++i)
         {
-            newArray[i] = arrayWithElements[i];
+            newArray[i] = this.arrayWithElements[i];
         }
 
         return newArray;
