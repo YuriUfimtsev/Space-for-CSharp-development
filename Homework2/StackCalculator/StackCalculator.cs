@@ -5,14 +5,17 @@ internal class StackCalculator
 {
     private IStack? newStack;
 
+    internal StackCalculator(IStack stack)
+       => this.newStack = stack;
+
     public (float result, bool checkOfCorrectWork) CalculateInPostfixForm(string commandSequence)
     {
         var arrayOfNumbersAndOperators = commandSequence.Split();
         var checkOfCorrectWork = true;
         for (int i = 0; i < arrayOfNumbersAndOperators.Length; ++i)
         {
-            if (commandSequence[i] == '*' || commandSequence[i] == '/'
-            || commandSequence[i] == '+' || commandSequence[i] == '-')
+            if (arrayOfNumbersAndOperators[i] == "*" || arrayOfNumbersAndOperators[i] == "/"
+            || arrayOfNumbersAndOperators[i] == "+" || arrayOfNumbersAndOperators[i] == "-")
             {
                 (var firstElement, checkOfCorrectWork) = newStack!.Pop();
                 (var secondElement, checkOfCorrectWork) = newStack.Pop();
@@ -22,22 +25,22 @@ internal class StackCalculator
                 }
 
                 float middleResult = 0;
-                switch (commandSequence[i])
+                switch (arrayOfNumbersAndOperators[i])
                 {
-                    case '*':
+                    case "*":
                         middleResult = firstElement * secondElement;
                         break;
-                    case '/':
+                    case "/":
                         if (firstElement.Equals((float)0))
                         {
                             return (0, false);
                         }
                         middleResult = secondElement / firstElement;
                         break;
-                    case '-':
+                    case "-":
                         middleResult = secondElement - firstElement;
                         break;
-                    case '+':
+                    case "+":
                         middleResult = firstElement + secondElement;
                         break;
                     default:
@@ -47,7 +50,7 @@ internal class StackCalculator
             }
             else
             {
-                newStack.Push(float.Parse(arrayOfNumbersAndOperators[i]));
+                newStack!.Push(float.Parse(arrayOfNumbersAndOperators[i]));
             }
         }
 

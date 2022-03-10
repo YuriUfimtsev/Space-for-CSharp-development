@@ -33,31 +33,31 @@ internal class StackOnArray : IStack
         ++indexOfArray;
     }
 
-    public (float returningValue, bool isStackEmpty) Pop()
+    public (float returningValue, bool isStackNotEmpty) Pop()
     {
         if (indexOfArray == 0)
         {
-            return (0, true);
+            return (0, false);
         }
 
-        float value = arrayWithElements[indexOfArray];
+        float value = arrayWithElements[indexOfArray - 1];
         arrayWithElements[indexOfArray - 1] = 0;
         --indexOfArray;
-        return (value, false);
+        return (value, true);
     }
 
     public bool IsEmpty()
     {
         return indexOfArray == 0;
     }
-    public (float returningValue, bool isStackEmpty) Top()
+    public (float returningValue, bool isStackNotEmpty) Top()
     {
         if (indexOfArray == 0)
         {
-            return (0, true);
+            return (0, false);
         }
 
-        return (arrayWithElements[indexOfArray - 1], false);
+        return (arrayWithElements[indexOfArray - 1], true);
     }
 
 

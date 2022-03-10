@@ -20,16 +20,16 @@ class StackOnList : IStack
         ++head.Size;
     }
 
-    public (float returningValue, bool isStackEmpty) Pop()
+    public (float returningValue, bool isStackNotEmpty) Pop()
     {
         if (head.NextElement == null)
         {
-            return (0, true);
+            return (0, false);
         }
         float value = head.Value;
         head = head.NextElement;
         --head.Size;
-        return (value, false);
+        return (value, true);
     }
 
     public bool IsEmpty()
@@ -37,13 +37,13 @@ class StackOnList : IStack
         return head.NextElement == null;
     }
 
-    public (float returningValue, bool isStackEmpty) Top()
+    public (float returningValue, bool isStackNotEmpty) Top()
     {
         if (head.NextElement == null)
         {
-            return (0, true);
+            return (0, false);
         }
-        return (head.Value, false);
+        return (head.Value, true);
     }
 
     public class StackElement
