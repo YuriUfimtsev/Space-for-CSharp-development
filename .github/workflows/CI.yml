@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.x' 
-      - run: dotnet-new build 
-      - run: dotnet-new test
+          dotnet-version: '6.x'
+      - run: cd "Homework2/Trie"
+      - run: dotnet build 
+      - run: dotnet test
