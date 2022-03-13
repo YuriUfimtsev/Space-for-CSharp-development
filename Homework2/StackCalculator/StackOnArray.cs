@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Struct stack based on array.
 /// </summary>
-internal class StackOnArray : IStack
+public class StackOnArray : IStack
 {
     private float[] arrayWithElements;
     private int indexOfArray;

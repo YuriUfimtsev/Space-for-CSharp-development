@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Struct stack based on list.
 /// </summary>
-internal class StackOnList : IStack
+public class StackOnList : IStack
 {
     private StackElement head = new();
 

@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Class to make computing using stack.
 /// </summary>
-internal class StackCalculator
+public class StackCalculator
 {
     private IStack? newStack;
 
@@ -13,7 +13,7 @@ internal class StackCalculator
     /// Initializes a new instance of the <see cref="StackCalculator"/> class.
     /// </summary>
     /// <param name="stack">stack element for StackCalculator.</param>
-    internal StackCalculator(IStack stack)
+    public StackCalculator(IStack stack)
        => this.newStack = stack;
 
     /// <summary>

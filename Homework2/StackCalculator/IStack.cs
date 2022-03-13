@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface to work with stack.
 /// </summary>
-internal interface IStack
+public interface IStack
 {
     /// <summary>
     /// Gets the size of stack.
