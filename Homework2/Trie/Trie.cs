@@ -69,7 +69,7 @@ public class Trie
     public (bool IsElementInTrie, int VertexValue) AddWithPointer(char newElement)
     {
         TrieElement? currentElement = this.triePointer;
-        if (currentElement!.Vertexes.ContainsKey(newElement))
+        if (currentElement!.Vertexes.ContainsKey(newElement) && currentElement.Vertexes[newElement] != null)
         {
             currentElement = currentElement.Vertexes[newElement] as TrieElement;
             if (!currentElement!.IsTerminal)
@@ -82,7 +82,12 @@ public class Trie
                 return (false, currentElement.VertexValue);
             }
 
-            this.triePointer = (TrieElement?)currentElement.Vertexes[newElement];
+            this.triePointer = (TrieElement?)currentElement;
+            //if (this.triePointer == null)
+            //{
+            //    this.triePointer = new TrieElement();
+            //}
+
             return (true, currentElement.VertexValue);
         }
 
