@@ -9,7 +9,7 @@
         /// Method communicates with user.
         /// </summary>
         /// <param name="args">Parameters for command line.</param>
-        internal static void Main(string[] args) //CI
+        internal static void Main(string[] args)
         {
             var newTrie = new Trie();
 

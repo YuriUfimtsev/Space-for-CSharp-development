@@ -7,12 +7,14 @@ using System.Collections;
 public class Trie
 {
     private TrieElement head = new();
+    private TrieElement? triePointer = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Trie"/> class.
     /// </summary>
     public Trie()
     {
+        this.triePointer = this.head;
     }
 
     /// <summary>
@@ -62,6 +64,33 @@ public class Trie
         }
 
         return currentElement!.IsTerminal = true;
+    }
+
+    public void AddWithPointer(char newElement)
+    {
+        TrieElement? currentElement = this.triePointer;
+        if (currentElement!.Vertexes.ContainsKey(newElement))
+        {
+            currentElement = currentElement.Vertexes[newElement] as TrieElement;
+            if (!currentElement!.IsTerminal)
+            {
+                currentElement!.IsTerminal = true;
+                ++currentElement.SizeOfTrieElement;
+                ++this.head.SizeOfTrieElement;
+                currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
+                this.triePointer = this.head;
+            }
+
+            this.triePointer = (TrieElement?)currentElement.Vertexes[newElement];
+        }
+
+        currentElement.Vertexes[newElement] = new TrieElement();
+        currentElement = currentElement.Vertexes[newElement] as TrieElement;
+        currentElement!.IsTerminal = true;
+        ++currentElement.SizeOfTrieElement;
+        ++this.head.SizeOfTrieElement;
+        currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
+        this.triePointer = this.head;
     }
 
     /// <summary>
@@ -160,11 +189,12 @@ public class Trie
     /// <summary>
     /// Nested class. Presents the elements of "Trie" class.
     /// </summary>
-    internal class TrieElement
+    public class TrieElement
     {
         private int sizeOfTrieElement = 0;
         private bool isTerminal = false;
         private Hashtable vertexes;
+        private int vertexValue = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TrieElement"/> class.
@@ -220,6 +250,11 @@ public class Trie
             {
                 this.vertexes = value;
             }
+        }
+
+        internal int VertexValue
+        {
+            get { return this.vertexValue; } set { this.vertexValue = value; }
         }
     }
 }
