@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Homework2\Trie\Trie.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Trie">
+      <HintPath>..\..\Homework2\Trie\obj\Debug\net6.0\Trie.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

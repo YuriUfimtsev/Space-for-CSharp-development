@@ -66,7 +66,7 @@ public class Trie
         return currentElement!.IsTerminal = true;
     }
 
-    public void AddWithPointer(char newElement)
+    public (bool IsElementInTrie, int VertexValue) AddWithPointer(char newElement)
     {
         TrieElement? currentElement = this.triePointer;
         if (currentElement!.Vertexes.ContainsKey(newElement))
@@ -79,9 +79,11 @@ public class Trie
                 ++this.head.SizeOfTrieElement;
                 currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
                 this.triePointer = this.head;
+                return (false, currentElement.VertexValue);
             }
 
             this.triePointer = (TrieElement?)currentElement.Vertexes[newElement];
+            return (true, currentElement.VertexValue);
         }
 
         currentElement.Vertexes[newElement] = new TrieElement();
@@ -91,6 +93,7 @@ public class Trie
         ++this.head.SizeOfTrieElement;
         currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
         this.triePointer = this.head;
+        return (false, currentElement.VertexValue);
     }
 
     /// <summary>
@@ -254,7 +257,8 @@ public class Trie
 
         internal int VertexValue
         {
-            get { return this.vertexValue; } set { this.vertexValue = value; }
+            get { return this.vertexValue; }
+            set { this.vertexValue = value; }
         }
     }
 }
