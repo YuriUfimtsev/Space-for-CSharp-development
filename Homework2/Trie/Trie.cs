@@ -77,16 +77,17 @@ public class Trie
                 currentElement!.IsTerminal = true;
                 ++currentElement.SizeOfTrieElement;
                 ++this.head.SizeOfTrieElement;
-                currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
+                currentElement.VertexValue = this.head.SizeOfTrieElement - 1;
                 this.triePointer = this.head;
                 return (false, currentElement.VertexValue);
             }
 
             this.triePointer = (TrieElement?)currentElement;
-            //if (this.triePointer == null)
-            //{
+
+            // if (this.triePointer == null)
+            // {
             //    this.triePointer = new TrieElement();
-            //}
+            // }
 
             return (true, currentElement.VertexValue);
         }
@@ -96,7 +97,7 @@ public class Trie
         currentElement!.IsTerminal = true;
         ++currentElement.SizeOfTrieElement;
         ++this.head.SizeOfTrieElement;
-        currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
+        currentElement.VertexValue = this.head.SizeOfTrieElement - 1;
         this.triePointer = this.head;
         return (false, currentElement.VertexValue);
     }
