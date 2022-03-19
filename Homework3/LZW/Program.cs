@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System;
 
 namespace LZW;
 public class LZW
 {
-    public static void Compress(byte[] arrayOfBites, string fileNameForCompress)
+    public static void Compress(string fileNameForCompress)
     {
+        byte[] arrayOfBytes = File.ReadAllBytes(fileNameForCompress);
         var newTrie = new Trie.Trie();
         for (int i = 0; i < 256; ++i)
         {
@@ -17,21 +19,21 @@ public class LZW
         int temporaryBitArrayIndex = 0;
         int counterOfBitesArray = 0;
         int currentBitSize = 9;
-        while (counterOfBitesArray < arrayOfBites.Length)
+        while (counterOfBitesArray < arrayOfBytes.Length)
         {
             (bool isInTrie, int numberOfSymbol) = (true, -1);
             int previousNumberOfSymbol = -1;
 
-            while (isInTrie && counterOfBitesArray < arrayOfBites.Length)
+            while (isInTrie && counterOfBitesArray < arrayOfBytes.Length)
             {
                 previousNumberOfSymbol = numberOfSymbol;
-                (isInTrie, numberOfSymbol) = newTrie.AddWithPointer((char)arrayOfBites[counterOfBitesArray]);
+                (isInTrie, numberOfSymbol) = newTrie.AddWithPointer((char)arrayOfBytes[counterOfBitesArray]);
                 ++counterOfBitesArray;
             }
 
-            counterOfBitesArray -= isInTrie && counterOfBitesArray == arrayOfBites.Length ? 0 : 1;
+            counterOfBitesArray -= isInTrie && counterOfBitesArray == arrayOfBytes.Length ? 0 : 1;
 
-            if (isInTrie && counterOfBitesArray == arrayOfBites.Length)
+            if (isInTrie && counterOfBitesArray == arrayOfBytes.Length)
             {
                 previousNumberOfSymbol = numberOfSymbol;
             }
@@ -52,7 +54,7 @@ public class LZW
                 ++temporaryBitArrayIndex;
             }
 
-            if (counterOfBitesArray == arrayOfBites.Length)
+            if (counterOfBitesArray == arrayOfBytes.Length)
             {
                 while (temporaryBitArrayIndex % 8 != 0)
                 {
@@ -86,8 +88,9 @@ public class LZW
         compressedFile.Close();
     }
 
-    public static bool Decompress(byte[] arrayOfBites, string fileNameForDecompressing)
+    public static bool Decompress(string fileNameForDecompressing)
     {
+        byte[] arrayOfBytes = File.ReadAllBytes(fileNameForDecompressing);
         var dictionary = new Dictionary<int, string>();
         for (int i = 0; i < 256; ++i)
         {
@@ -96,7 +99,7 @@ public class LZW
 
         FileInfo newFile = new(fileNameForDecompressing.Remove(fileNameForDecompressing.Length - 7));
         FileStream decompressedFile = newFile.Create();
-        BitArray arrayOfCompressedFileBits = new BitArray(arrayOfBites);
+        BitArray arrayOfCompressedFileBits = new BitArray(arrayOfBytes);
         int arrayOfCompressedFileBitsIndex = 0;
         int currentBitSize = 9;
         string? previousValue = null;
@@ -142,11 +145,36 @@ public class LZW
 
     private static void Main(string[] args)
     {
-        byte[] arrayOfBytes
-            = File.ReadAllBytes("..\\..\\..\\attribcache140.bin");
-        Compress(arrayOfBytes, "..\\..\\..\\attribcache140.bin");
-        byte[] arrayOfBytes1
-            = File.ReadAllBytes("..\\..\\..\\attribcache140.bin.zipped");
-        bool m = Decompress(arrayOfBytes1, "..\\..\\..\\attribcache140.bin.zipped");
+        if (args.Length == 0 || args.Length == 1)
+        {
+            Console.WriteLine("Incorrect input");
+            return;
+        }
+
+        Console.WriteLine(string.Equals(args[1], "-c")
+            ? "You want to compressed file with path: " : (string.Equals(args[1], "-u")
+            ? "You want to UNcompressed file with path: " : "Incorrect input. Try again"));
+        if (!string.Equals(args[1], "-u") && !string.Equals(args[1], "-c"))
+        {
+            return;
+        }
+
+        Console.WriteLine(args[0]);
+        if (string.Equals(args[1], "-u"))
+        {
+            bool isDecompressCorrect = Decompress(args[0]);
+            if (!isDecompressCorrect)
+            {
+                Console.WriteLine("Unfortunately, Uncompressed has been made with error.");
+                return;
+            }
+            Console.WriteLine("Result file without extension '.zipped' has been added");
+        }
+
+        else if (string.Equals(args[1], "-c"))
+        {
+            Compress(args[0]);
+            Console.WriteLine("Result file with extension '.zipped' has been added");
+        }
     }
 }

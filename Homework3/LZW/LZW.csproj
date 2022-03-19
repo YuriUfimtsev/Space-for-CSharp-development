@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Homework2\Trie\Trie.csproj" />
+    <ProjectReference Include="..\..\Homework1\Burrows–WheelerTransform\Burrows–WheelerTransform.csproj" />
   </ItemGroup>
 
   <ItemGroup>
