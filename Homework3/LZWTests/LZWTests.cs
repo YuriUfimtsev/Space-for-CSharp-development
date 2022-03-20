@@ -67,30 +67,4 @@ public class LZWTests
 
         Assert.Pass();
     }
-
-    //[Test]
-    //public void BWTTransformTheFileAndCompressAndDecompress()
-    //{
-    //    (var str, var i) = BurrowsWheelerTransform.BurrowsWheelerTransform.DirectBWT("fxhdfhdjdtyfhgfj uykf gh hg   hgfhf hgf ghf ghfghfkuytyuktyutukfjthfjthfdrsxthe658658768968");
-    //    var pop = BurrowsWheelerTransform.BurrowsWheelerTransform.ReverseBWT(str, i);
-    //    var fileToCompress = "..//..//..//TestFile.bin";
-    //    var fileToCompareWithResult = ("..//..//..//TestFileBase.bin");
-    //    var (resultString, endStringPosition)
-    //        = BurrowsWheelerTransform.BurrowsWheelerTransform.DirectBWT(File.ReadAllText(fileToCompress));
-    //    string OOObasedStringFromFile = BurrowsWheelerTransform.BurrowsWheelerTransform.ReverseBWT
-    //(resultString, endStringPosition);
-    //    var extension = Path.GetExtension(fileToCompress);
-    //    FileInfo fileWithBWTResult = new(fileToCompress.Remove(fileToCompress.Length - extension.Length) + "BWT" + extension);
-    //    File.WriteAllText(fileWithBWTResult.FullName, resultString);
-    //    LZW.LZW.Compress(fileWithBWTResult.FullName);
-    //    if (File.ReadAllBytes(fileWithBWTResult + ".zipped").Length == File.ReadAllBytes(fileToCompress).Length)
-    //    {
-    //        Assert.Fail();
-    //    }
-
-    //    bool isDecompressCorrect = LZW.LZW.Decompress(fileWithBWTResult + ".zipped");
-    //    string basedStringFromFile = BurrowsWheelerTransform.BurrowsWheelerTransform.ReverseBWT
-    //        (File.ReadAllText(fileWithBWTResult.FullName), endStringPosition);
-    //    Assert.IsTrue(isDecompressCorrect && Equals(basedStringFromFile, File.ReadAllText(fileToCompareWithResult)));
-    //}
 }
