@@ -1,29 +1,35 @@
-﻿using System.Collections;
-using System;
+﻿namespace LZW;
 
-namespace LZW;
+using System.Collections;
+
+/// <summary>
+/// Class realizes two base methods: "Compress the file" and "Decompress the file". Founded on LZW algorithm.
+/// </summary>
 public class LZW
 {
+    /// <summary>
+    /// Method compresses the file.
+    /// </summary>
+    /// <param name="fileNameForCompress">Name of file you want to compress.</param>
     public static void Compress(string fileNameForCompress)
     {
         byte[] arrayOfBytes = File.ReadAllBytes(fileNameForCompress);
         var newTrie = new Trie.Trie();
-        for (int i = 0; i < 256; ++i)
+        for (var i = 0; i < 256; ++i)
         {
-            (bool isInTrie, int number) = newTrie.AddWithPointer((char)i);
+            (var isInTrie, var number) = newTrie.AddWithPointer((char)i);
         }
 
         FileInfo newFile = new(fileNameForCompress + ".zipped");
-        FileStream compressedFile = newFile.Create();
+        var compressedFile = newFile.Create();
         BitArray temporaryBitArray = new(64);
-        int temporaryBitArrayIndex = 0;
-        int counterOfBitesArray = 0;
-        int currentBitSize = 9;
+        var temporaryBitArrayIndex = 0;
+        var counterOfBitesArray = 0;
+        var currentBitSize = 9;
         while (counterOfBitesArray < arrayOfBytes.Length)
         {
-            (bool isInTrie, int numberOfSymbol) = (true, -1);
-            int previousNumberOfSymbol = -1;
-
+            (var isInTrie, var numberOfSymbol) = (true, -1);
+            var previousNumberOfSymbol = -1;
             while (isInTrie && counterOfBitesArray < arrayOfBytes.Length)
             {
                 previousNumberOfSymbol = numberOfSymbol;
@@ -32,23 +38,22 @@ public class LZW
             }
 
             counterOfBitesArray -= isInTrie && counterOfBitesArray == arrayOfBytes.Length ? 0 : 1;
-
             if (isInTrie && counterOfBitesArray == arrayOfBytes.Length)
             {
                 previousNumberOfSymbol = numberOfSymbol;
             }
 
-            int countOfNotNulls = 0;
+            var countOfNotNulls = 0;
             while (previousNumberOfSymbol > 0)
             {
-                int digit = previousNumberOfSymbol % 2;
+                var digit = previousNumberOfSymbol % 2;
                 temporaryBitArray[temporaryBitArrayIndex] = (digit == 0) ? false : true;
                 previousNumberOfSymbol /= 2;
                 ++temporaryBitArrayIndex;
                 ++countOfNotNulls;
             }
 
-            for (int i = 0; i < currentBitSize - countOfNotNulls; ++i)
+            for (var i = 0; i < currentBitSize - countOfNotNulls; ++i)
             {
                 temporaryBitArray[temporaryBitArrayIndex] = false;
                 ++temporaryBitArrayIndex;
@@ -66,8 +71,8 @@ public class LZW
             while (temporaryBitArrayIndex >= 8)
             {
                 byte newByte = 0;
-                int multiplier = 1;
-                for (int i = 0; i < 8; ++i)
+                var multiplier = 1;
+                for (var i = 0; i < 8; ++i)
                 {
                     newByte += (byte)((temporaryBitArray[i] ? 1 : 0) * multiplier);
                     multiplier *= 2;
@@ -88,11 +93,16 @@ public class LZW
         compressedFile.Close();
     }
 
+    /// <summary>
+    /// Method decompresses the file.
+    /// </summary>
+    /// <param name="fileNameForDecompressing">Name of file you want to decompress.</param>
+    /// <returns>true if decompressing is correct. Else false.</returns>
     public static bool Decompress(string fileNameForDecompressing)
     {
         byte[] arrayOfBytes = File.ReadAllBytes(fileNameForDecompressing);
         var dictionary = new Dictionary<int, string>();
-        for (int i = 0; i < 256; ++i)
+        for (var i = 0; i < 256; ++i)
         {
             dictionary.Add(i, char.ToString((char)i));
         }
@@ -100,15 +110,15 @@ public class LZW
         FileInfo newFile = new(fileNameForDecompressing.Remove(fileNameForDecompressing.Length - 7));
         FileStream decompressedFile = newFile.Create();
         BitArray arrayOfCompressedFileBits = new BitArray(arrayOfBytes);
-        int arrayOfCompressedFileBitsIndex = 0;
-        int currentBitSize = 9;
+        var arrayOfCompressedFileBitsIndex = 0;
+        var currentBitSize = 9;
         string? previousValue = null;
-        int currentNumber = 256;
+        var currentNumber = 256;
         while (arrayOfCompressedFileBitsIndex < arrayOfCompressedFileBits.Length)
         {
-            int multiplier = 1;
-            int newNumber = 0;
-            for (int i = 0; i < currentBitSize; ++i)
+            var multiplier = 1;
+            var newNumber = 0;
+            for (var i = 0; i < currentBitSize; ++i)
             {
                 newNumber += multiplier * (arrayOfCompressedFileBits[arrayOfCompressedFileBitsIndex] ? 1 : 0);
                 multiplier *= 2;
@@ -120,8 +130,9 @@ public class LZW
                 }
             }
 
-            var dictionaryValue = dictionary.ContainsKey(newNumber) ? dictionary[newNumber] : previousValue + previousValue[0];
-            for (int i = 0; i < dictionaryValue.Length; ++i)
+            var dictionaryValue = dictionary.ContainsKey(newNumber) ? dictionary[newNumber]
+                : previousValue + previousValue![0];
+            for (var i = 0; i < dictionaryValue.Length; ++i)
             {
                 decompressedFile.WriteByte((byte)dictionaryValue[i]);
             }
@@ -162,19 +173,34 @@ public class LZW
         Console.WriteLine(args[0]);
         if (string.Equals(args[1], "-u"))
         {
-            bool isDecompressCorrect = Decompress(args[0]);
+            var isDecompressCorrect = Decompress(args[0]);
             if (!isDecompressCorrect)
             {
                 Console.WriteLine("Unfortunately, Uncompressed has been made with error.");
                 return;
             }
+
             Console.WriteLine("Result file without extension '.zipped' has been added");
         }
-
         else if (string.Equals(args[1], "-c"))
         {
             Compress(args[0]);
             Console.WriteLine("Result file with extension '.zipped' has been added");
+            var file = new FileInfo(args[0]);
+            Compress(args[0]);
+            var compressedFile = new FileInfo(args[0] + ".zipped");
+            long compressionFactor = file.Length / compressedFile.Length;
+            Console.WriteLine($"Compression factor without using BWT = {compressionFactor}");
+
+            var (resultSequence, endStringPosition)
+                = BurrowsWheelerTransform.BurrowsWheelerTransform.DirectBWT(File.ReadAllText(args[0]));
+            var extension = Path.GetExtension(args[0]);
+            FileInfo fileWithBWTResult = new(args[0].Remove(args[0].Length - extension.Length) + "BWT" + extension);
+            File.WriteAllText(fileWithBWTResult.FullName, resultSequence);
+            Compress(fileWithBWTResult.FullName);
+            var compressedFileWithBWT = new FileInfo(fileWithBWTResult.FullName + ".zipped");
+            long compressionFactorWithBWT = fileWithBWTResult.Length / compressedFileWithBWT.Length;
+            Console.WriteLine($"Compression factor with using BWT = {compressionFactorWithBWT}");
         }
     }
 }

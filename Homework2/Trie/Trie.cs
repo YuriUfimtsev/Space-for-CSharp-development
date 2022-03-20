@@ -66,6 +66,12 @@ public class Trie
         return currentElement!.IsTerminal = true;
     }
 
+    /// <summary>
+    /// Method adds symbols in Trie. Or finds them in Trie.
+    /// </summary>
+    /// <param name="newElement">Element that you want to add in Trie.</param>
+    /// <returns>true if newElement has been found in Trie. Else false.
+    /// Also return vertex value (number).</returns>
     public (bool IsElementInTrie, int VertexValue) AddWithPointer(char newElement)
     {
         TrieElement? currentElement = this.triePointer;
@@ -83,12 +89,6 @@ public class Trie
             }
 
             this.triePointer = (TrieElement?)currentElement;
-
-            // if (this.triePointer == null)
-            // {
-            //    this.triePointer = new TrieElement();
-            // }
-
             return (true, currentElement.VertexValue);
         }
 
@@ -261,6 +261,9 @@ public class Trie
             }
         }
 
+        /// <summary>
+        /// Gets or sets a number (value) of vertex.
+        /// </summary>
         internal int VertexValue
         {
             get { return this.vertexValue; }
