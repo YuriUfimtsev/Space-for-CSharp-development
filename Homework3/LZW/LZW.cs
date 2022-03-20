@@ -192,15 +192,15 @@ public class LZW
             long compressionFactor = file.Length / compressedFile.Length;
             Console.WriteLine($"Compression factor without using BWT = {compressionFactor}");
 
-            var (resultSequence, endStringPosition)
-                = BurrowsWheelerTransform.BurrowsWheelerTransform.DirectBWT(File.ReadAllText(args[0]));
-            var extension = Path.GetExtension(args[0]);
-            FileInfo fileWithBWTResult = new(args[0].Remove(args[0].Length - extension.Length) + "BWT" + extension);
-            File.WriteAllText(fileWithBWTResult.FullName, resultSequence);
-            Compress(fileWithBWTResult.FullName);
-            var compressedFileWithBWT = new FileInfo(fileWithBWTResult.FullName + ".zipped");
-            long compressionFactorWithBWT = fileWithBWTResult.Length / compressedFileWithBWT.Length;
-            Console.WriteLine($"Compression factor with using BWT = {compressionFactorWithBWT}");
+            //var (resultSequence, endStringPosition)
+            //    = BurrowsWheelerTransform.BurrowsWheelerTransform.DirectBWT(File.ReadAllText(args[0]));
+            //var extension = Path.GetExtension(args[0]);
+            //FileInfo fileWithBWTResult = new(args[0].Remove(args[0].Length - extension.Length) + "BWT" + extension);
+            //File.WriteAllText(fileWithBWTResult.FullName, resultSequence);
+            //Compress(fileWithBWTResult.FullName);
+            //var compressedFileWithBWT = new FileInfo(fileWithBWTResult.FullName + ".zipped");
+            //long compressionFactorWithBWT = fileWithBWTResult.Length / compressedFileWithBWT.Length;
+            //Console.WriteLine($"Compression factor with using BWT = {compressionFactorWithBWT}");
         }
     }
 }
