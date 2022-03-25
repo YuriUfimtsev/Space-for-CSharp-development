@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  before_build:
+  greeting_job
     - choco install codecov
   build-Windows:
     runs-on: windows-latest
