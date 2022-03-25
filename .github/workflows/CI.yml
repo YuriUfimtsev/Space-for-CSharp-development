@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  build-Windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
