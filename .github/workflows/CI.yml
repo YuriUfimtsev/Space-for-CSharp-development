@@ -3,8 +3,11 @@ name: CI
 on: [push]
 
 jobs:
-  build-Windows:
-    runs-on: windows-latest
+  build:
+    runs-on: ${{ listOfOS.os }}
+    strategy:
+      listOfOS:
+        os: [windows-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
@@ -14,5 +17,6 @@ jobs:
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet build $file.FullName}
       - name: Run tests
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet test $file.FullName}
+
 
 
