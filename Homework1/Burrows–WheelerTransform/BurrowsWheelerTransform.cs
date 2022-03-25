@@ -43,7 +43,7 @@ internal static class BurrowsWheelerTransform
     /// <param name="stringForReverseBWT"> Принимает строку для обратного преобразования. </param>
     /// <param name="endStringPosition"> Принимает на вход позицию конца преобразованной строки. </param>
     /// <returns> Возвращает преобразованную строку. </returns>
-    internal static string ReverseBWT(string stringForReverseBWT, int endStringPosition)
+    internal static string ReverseBWT(string stringForReverseBWT, int endStringPosition) // CI setting
     {
         var arrayWithSortedStringElements = stringForReverseBWT.ToCharArray();
         Array.Sort(arrayWithSortedStringElements);
