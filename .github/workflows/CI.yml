@@ -11,6 +11,6 @@ jobs:
         with:
           dotnet-version: '6.x'
       - name: Build
-        run: $slnList = Get-ChildItem $foo.FullName -Recurse -Filter '*.sln'; foreach ($file in $slnList) {dotnet build $file.FullName}
+        run: $slnList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnList) {dotnet build $file.FullName}
       - name: Run tests
-        run: $slnList = Get-ChildItem $foo.FullName -Recurse -Filter '*.sln'; foreach ($file in $slnList) {dotnet test $file.FullName}
+        run: $slnList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnList) {dotnet test $file.FullName}
