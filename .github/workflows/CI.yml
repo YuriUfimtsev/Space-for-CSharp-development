@@ -15,7 +15,7 @@ jobs:
       - name: Run tests
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet test $file.FullName}
 
-  build-Ubuntu:
+    build-Ubuntu:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
