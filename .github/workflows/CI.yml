@@ -16,4 +16,4 @@ jobs:
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet test $file.FullName}
       - name: Codecov
         uses: actions/checkout@master
-        uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v2
