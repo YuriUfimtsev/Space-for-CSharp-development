@@ -3,8 +3,6 @@ name: CI
 on: [push]
 
 jobs:
-  greeting_job:
-      run: choco install codecov
   build-Windows:
     runs-on: windows-latest
     steps:
@@ -16,4 +14,3 @@ jobs:
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet build $file.FullName}
       - name: Run tests
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet test $file.FullName}
-      - codecov -f <>
