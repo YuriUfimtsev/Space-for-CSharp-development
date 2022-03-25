@@ -4,9 +4,9 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ${{ listOfOS.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
-      listOfOS:
+      matrix:
         os: [windows-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
