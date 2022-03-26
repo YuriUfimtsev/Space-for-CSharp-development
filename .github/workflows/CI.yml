@@ -3,12 +3,14 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  build-Windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.x' 
-      - run: dotnet build 
-      - run: dotnet test
+          dotnet-version: '6.x'
+      - name: Build
+        run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet build $file.FullName}
+      - name: Run tests
+        run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet test $file.FullName}
