@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace ParseTree;
 
-namespace ParseTree;
+/// <summary>
+/// Class for operands.
+/// </summary>
 public class Operand : INode
 {
     private int number;
-    private Operator? parent;
 
-    public Operator? Parent
-    {
-        get { return parent; } set { parent = value; }
-    }
+    /// <summary>
+    /// Gets or sets operand's value.
+    /// </summary>
     public int Number
     {
-        get { return number; } set { number = value; }
+        get { return this.number; } set { this.number = value; }
     }
 
     public void Print()
-        => Console.Write($"{number} ");
+        => Console.Write($"{this.number} ");
 
     public int Eval()
-        => number;
+        => this.number;
 }

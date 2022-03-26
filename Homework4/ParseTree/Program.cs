@@ -1,12 +1,32 @@
-﻿namespace ParseTree;
+﻿global using System;
+global using System.Collections.Generic;
 
+namespace ParseTree;
+
+/// <summary>
+/// Class with Main function.
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Main function.
+    /// </summary>
+    /// <param name="args">arguments from command line.</param>
     public static void Main(string[] args)
     {
-        var hh = "(* 2 (+ 1 1))"; // Наоборот точно не сработает!!!
-        ParseTree k = new();
-        int p = 0;
-        INode? newTree = k.createNewNodeForParseTree(hh, ref p);
+        FileInfo fileInfo = new("../../../PrefixExpression.txt");
+        string prefixSequence = File.ReadAllText($"{fileInfo}");
+        Console.WriteLine($"Sequence from file: {prefixSequence}");
+        ParseTree parseTree = new();
+        var indexForParseTreeCreation = -1;
+        INode? newTree = parseTree.CreateNewNodeForParseTree(prefixSequence, ref indexForParseTreeCreation);
+        if (newTree == null)
+        {
+            Console.WriteLine("Error with Parse tree creation");
+        }
+
+        Console.WriteLine($"Result of calculation: {parseTree.Eval(newTree!)}");
+        Console.Write("Expression in infix form: ");
+        parseTree.Print(newTree!);
     }
 }

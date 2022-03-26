@@ -1,43 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace ParseTree;
 
-namespace ParseTree;
-
-abstract public class Operator : INode
+/// <summary>
+/// Abstract class for operators.
+/// </summary>
+public abstract class Operator : INode
 {
     private INode? rightChild;
     private INode? leftChild;
     private char nodeOperator;
 
+    /// <summary>
+    /// Gets or sets the RightChild for node.
+    /// </summary>
     public INode? RightChild
     {
-        get { return rightChild; } set { rightChild = value; }
+        get { return this.rightChild; } set { this.rightChild = value; }
     }
 
+    /// <summary>
+    /// Gets or sets the LeftChild for node.
+    /// </summary>
     public INode? LeftChild
     {
-        get { return leftChild; } set { leftChild = value; }
+        get { return this.leftChild; } set { this.leftChild = value; }
     }
 
-    public char NodeOperator
-    {
-        get { return nodeOperator; } set { nodeOperator = value; }
-    }
+    public abstract void Print();
 
-    public void Print()
-    {
-        if (leftChild == null || rightChild == null)
-        {
-            throw new InvalidOperationException();
-        }
-
-        leftChild.Print();
-        Console.Write(nodeOperator);
-        rightChild.Print();
-    }
-
-    abstract public int Eval();
-
+    public abstract int Eval();
 }

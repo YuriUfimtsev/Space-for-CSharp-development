@@ -1,101 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ParseTree;
 
-namespace ParseTree;
-internal class ParseTree
+/// <summary>
+/// Class for creation ParseTree.
+/// </summary>
+public class ParseTree
 {
-    private bool isOperator(char symbol)
-        => symbol == '+' || symbol == '*' || symbol == '/' || symbol == '-';
-
-    private bool isDigit(char symbol)
-        => symbol >= '0' && symbol <= '9';
-
-    private bool isBracketOrSpace(char symbol)
-        => symbol == '(' || symbol == ')' || symbol == ' ';
-
-    private (int Number, int NewIndex) getNumberFromSequence(string stringOfNumbersAndOperators, int index)
+    /// <summary>
+    /// Method creates new node of Parsee tree.
+    /// </summary>
+    /// <param name="stringOfNumbersAndOperators">sequence for parse tree.</param>
+    /// <param name="index">start sequence index.</param>
+    /// <returns>Parse tree's root.</returns>
+    public INode? CreateNewNodeForParseTree(string stringOfNumbersAndOperators, ref int index)
     {
-        string stringForNumber = "";
-        while (isDigit(stringOfNumbersAndOperators[index]) || stringOfNumbersAndOperators[index] == '-')
-        {
-            stringForNumber += stringOfNumbersAndOperators[index];
-            ++index;
-        }
-        --index;
-        return (int.Parse(stringForNumber), index);
-    }
-
-    //public void createNewNodeForParseTree(Operator? @operator, Operand? operand)
-    //{
-    //    if (operand == null)
-    //    {
-    //        if (node == null)
-    //        {
-    //            node = @operator!;
-    //        }
-
-    //        if (treeRoot == null)
-    //        {
-    //            treeRoot = node;
-    //        }
-
-    //        else if ((node as Operator)!.RightChild == null)
-    //        {
-    //            (node as Operator)!.RightChild = @operator!;
-    //            node = (node as Operator)!.RightChild;
-    //        }
-
-    //        else if ((node as Operator)!.LeftChild == null)
-    //        {
-    //            (node as Operator)!.LeftChild = @operator!;
-    //            node = (node as Operator)!.LeftChild;
-    //        }
-    //    }
-
-    //    else if (@operator == null)
-    //    {
-    //        if ((node as Operator)!.LeftChild == null)
-    //        {
-    //            (node as Operator)!.LeftChild = operand;
-    //        }
-
-    //        else if((node as Operator)!.RightChild == null)
-    //        {
-    //            (node as Operator)!.RightChild = operand;
-    //        }
-
-    //        int.TryParse()
-    //    }
-    //}
-    private INode? node = null;
-    public INode? createNewNodeForParseTree(string stringOfNumbersAndOperators, ref int index)
+    ++index;
+    INode? node = null;
+    while (index < stringOfNumbersAndOperators.Length && this.IsBracketOrSpace(stringOfNumbersAndOperators[index]))
     {
         ++index;
-        while (index < stringOfNumbersAndOperators.Length && isBracketOrSpace(stringOfNumbersAndOperators[index]))
-        {
-            ++index;
-        }
-        if (isOperator(stringOfNumbersAndOperators[index]) && stringOfNumbersAndOperators[index + 1] == ' ')
-        {
-            node = Parse(stringOfNumbersAndOperators, ref index, true);
-            (node as Operator)!.LeftChild = createNewNodeForParseTree(stringOfNumbersAndOperators, ref index);
-            (node as Operator)!.RightChild = createNewNodeForParseTree(stringOfNumbersAndOperators, ref index);
-        }
-        else if (isDigit(stringOfNumbersAndOperators[index]) || stringOfNumbersAndOperators[index] == '-')
-        {
-            node = Parse(stringOfNumbersAndOperators, ref index, false);
-        }
-        return node;
     }
 
-    public INode? Parse(string stringOfNumbersAndOperations, ref int index, bool isOperator)
+    if (this.IsOperator(stringOfNumbersAndOperators[index]) && stringOfNumbersAndOperators[index + 1] == ' ')
+    {
+        node = this.Parse(stringOfNumbersAndOperators, ref index, true);
+        (node as Operator)!.LeftChild = this.CreateNewNodeForParseTree(stringOfNumbersAndOperators, ref index);
+        (node as Operator)!.RightChild = this.CreateNewNodeForParseTree(stringOfNumbersAndOperators, ref index);
+    }
+    else if (this.IsDigit(stringOfNumbersAndOperators[index]) || stringOfNumbersAndOperators[index] == '-')
+    {
+        node = this.Parse(stringOfNumbersAndOperators, ref index, false);
+    }
+
+    return node;
+}
+
+    /// <summary>
+    /// Method gets the next element from sequence.
+    /// </summary>
+    /// <param name="stringOfNumbersAndOperators">string with numbers and operators.</param>
+    /// <param name="index">start string's index for parsing.</param>
+    /// <param name="isOperator">shows what type has the next string element.</param>
+    /// <returns>Operator or Operand object.</returns>
+    /// <exception cref="NotImplementedException">if Parse doesn't find Operator or Operand.</exception>
+    public INode? Parse(string stringOfNumbersAndOperators, ref int index, bool isOperator)
     {
         if (!isOperator)
         {
-            var (resultNumber, newIndex) = getNumberFromSequence(stringOfNumbersAndOperations, index);
+            var (resultNumber, newIndex) = this.GetNumberFromSequence(stringOfNumbersAndOperators, index);
             Operand operand = new();
             operand.Number = resultNumber;
             index = newIndex;
@@ -104,82 +55,68 @@ internal class ParseTree
         else
         {
             ++index;
-            return (stringOfNumbersAndOperations[index - 1]) switch
+            return stringOfNumbersAndOperators[index - 1] switch
             {
                 '+' => new AdditionOperator(),
                 '-' => new SubstractionOperator(),
                 '/' => new DivisionOperator(),
                 '*' => new MultiplicationOperator(),
-                _ => throw new NotImplementedException()
+                _ => throw new NotImplementedException(),
             };
         }
     }
 
-    //public INode? Parse(string stringOfNumbersAndOperators, int index)
-    //{
-    //    var index = 0;
-    //    while (index < stringOfNumbersAndOperators.Length)
-    //    {
-    //        while (isBracketOrSpace(stringOfNumbersAndOperators[index]))
-    //        {
-    //            ++index;
-    //        }
+    /// <summary>
+    /// Method prints on console expression from Parse tree.
+    /// </summary>
+    /// <param name="treeRoot">root of Parse tree.</param>
+    /// <exception cref="InvalidOperationException">incorrect input.</exception>
+    public void Print(INode treeRoot)
+    {
+        if (treeRoot == null)
+        {
+            throw new InvalidOperationException();
+        }
 
-    //        if (index >= stringOfNumbersAndOperators.Length)
-    //        {
-    //            return;
-    //        }
+        treeRoot.Print();
+    }
 
-    //        if (isOperator(stringOfNumbersAndOperators[index])
-    //            && stringOfNumbersAndOperators[index + 1] == ' ')
-    //        {
-    //            switch (stringOfNumbersAndOperators[index])
-    //            {
-    //                case '+':
-    //                    createNewNodeForParseTree(new MultiplicationOperator(), null);
-    //                    break;
-    //                case '-':
-    //                    createNewNodeForParseTree(new SubstractionOperator(), null);
-    //                    break;
-    //                case '/':
-    //                    createNewNodeForParseTree(new DivisionOperator(), null);
-    //                    break;
-    //                case '*':
-    //                    createNewNodeForParseTree(new MultiplicationOperator(), null);
-    //                    break;
-    //                default:
-    //                    break;
-    //            }
-    //            ++index;
-    //        }
-    //        else if (isDigit(stringOfNumbersAndOperators[index]) || stringOfNumbersAndOperators[index] == '-')
-    //        {
-    //            var (number, newIndex) = getNumberFromSequence(stringOfNumbersAndOperators, index);
-    //            index = newIndex;
-    //            var newOperand = new Operand();
-    //            newOperand.Number = number;
-    //            createNewNodeForParseTree(null, newOperand);
-    //        }
-    //    }
-    //}
+    /// <summary>
+    /// Method calculates the mathematical Parse tree expression.
+    /// </summary>
+    /// <param name="treeRoot">root of Parse tree.</param>
+    /// <returns>result of calculation.</returns>
+    /// <exception cref="InvalidOperationException">incorrect input.</exception>
+    public int Eval(INode treeRoot)
+    {
+        if (treeRoot == null)
+        {
+            throw new InvalidOperationException();
+        }
 
-    //public void Print()
-    //{
-    //    if (treeRoot == null)
-    //    {
-    //        throw new InvalidOperationException();
-    //    }
+        return treeRoot.Eval();
+    }
 
-    //    treeRoot.Print();
-    //}
+    private bool IsOperator(char symbol)
+    => symbol == '+' || symbol == '*' || symbol == '/' || symbol == '-';
 
-    //public int Eval()
-    //{
-    //    if (treeRoot == null)
-    //    {
-    //        throw new InvalidOperationException();
-    //    }
+    private bool IsDigit(char symbol)
+        => symbol >= '0' && symbol <= '9';
 
-    //    return treeRoot.Eval();
-    //}
+    private bool IsBracketOrSpace(char symbol)
+        => symbol == '(' || symbol == ')' || symbol == ' ';
+
+    private (int Number, int NewIndex) GetNumberFromSequence(string stringOfNumbersAndOperators, int index)
+    {
+        string stringForNumber = string.Empty;
+        while (index < stringOfNumbersAndOperators.Length
+            && (this.IsDigit(stringOfNumbersAndOperators[index]) || stringOfNumbersAndOperators[index] == '-'))
+        {
+            stringForNumber += stringOfNumbersAndOperators[index];
+            ++index;
+        }
+
+        --index;
+        return (int.Parse(stringForNumber), index);
+    }
 }

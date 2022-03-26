@@ -1,17 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace ParseTree;
 
-namespace ParseTree;
+/// <summary>
+/// Class for "-" operator.
+/// </summary>
 public class SubstractionOperator : Operator
 {
     public override int Eval()
     {
-        if (LeftChild == null || RightChild == null)
+        if (this.LeftChild == null || this.RightChild == null)
         {
             throw new ArgumentException();
         }
-        return LeftChild.Eval() - RightChild.Eval();
+
+        return this.LeftChild.Eval() - this.RightChild.Eval();
+    }
+
+    public override void Print()
+    {
+        if (this.LeftChild == null || this.RightChild == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        Console.Write("( ");
+        this.LeftChild.Print();
+        Console.Write("- ");
+        this.RightChild.Print();
+        Console.Write(") ");
     }
 }

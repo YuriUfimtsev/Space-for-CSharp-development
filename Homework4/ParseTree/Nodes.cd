@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ParseTree.Operand">
-    <Position X="5.5" Y="2.25" Width="1.5" />
+    <Position X="5.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAIAAAQABAAEAAQAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Operand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="ParseTree.Operator">
     <Position X="7.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAEAAAABAAAAAAAAAAAAAACAAAIAgAACAAA=</HashCode>
+      <HashCode>AAAAAAAAIAEAAAABAAAAAAAAAAAAAACAAAIAgAAGAAA=</HashCode>
       <FileName>Operator.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -47,7 +47,7 @@
   <Interface Name="ParseTree.INode" Collapsed="true">
     <Position X="6.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>INode.cs</FileName>
     </TypeIdentifier>
   </Interface>
