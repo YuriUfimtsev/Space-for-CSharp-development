@@ -3,7 +3,7 @@
     /// <summary>
     /// Class consists of "Main" method. Designed for communicate with user.
     /// </summary>
-    internal class Program
+    internal class Program // Text for commit and launch Trie with CI
     {
         /// <summary>
         /// Method communicates with user.
