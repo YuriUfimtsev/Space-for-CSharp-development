@@ -3,7 +3,7 @@
 /// <summary>
 /// Class contains Main method.
 /// </summary>
-internal class Program
+internal class Program // Text for commit and launch with CI
 {
     private static void Main(string[] args)
     {
