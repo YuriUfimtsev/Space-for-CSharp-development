@@ -68,6 +68,81 @@ public class List<T>
         return true;
     }
 
+    public bool RemoveByPosition(int position)
+    {
+        if (head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        --sizeOfList;
+        if (sizeOfList == 0)
+        {
+            head = null;
+            tail = null;
+            return position == 0;
+        }
+
+        if (position <= 0)
+        {
+            head = head.Next;
+            return false;
+        }
+
+        ListElement<T> currentElement = head;
+        if (position > sizeOfList)
+        {
+            while (currentElement.Next!.Next != null)
+            {
+                currentElement = currentElement.Next;
+            }
+            currentElement.Next = null;
+            tail = currentElement;
+            return false;
+        }
+
+        for (int i = 0; i < position - 1; ++i)
+        {
+            currentElement = currentElement.Next!;
+        }
+
+        currentElement.Next = currentElement.Next!.Next;
+        if (currentElement.Next == null)
+        {
+            tail = currentElement;
+        }
+
+        return true;
+    }
+
+    public bool ChangeByPosition(int position, T newValue)
+    {
+        if (head == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (position <= 0)
+        {
+            head.Value = newValue;
+            return false;
+        }
+
+        if (position >= sizeOfList - 1)
+        {
+            tail!.Value = newValue;
+            return false;
+        }
+
+        ListElement<T> currentElement = head;
+        for (int i = 0; i < position; ++i)
+        {
+            currentElement = currentElement.Next!;
+        }
+
+        currentElement.Value = newValue;
+        return true;
+    }
 
     public T GetElementFromHead()
     {
@@ -88,9 +163,4 @@ public class List<T>
 
         return tail.Value;
     }
-
-
-    //public bool GetByPosition(T value, int position)
-
-    //public bool RemoveByPosition(T value, int position)
 }

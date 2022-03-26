@@ -1,15 +1,11 @@
 using NUnit.Framework;
 using UniqueListTests;
+using System;
 
 namespace UniqueListTests
 {
     public class StandartListTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void AddingByPositionInEmptyListTest()
         {
@@ -34,7 +30,7 @@ namespace UniqueListTests
         }
 
         [Test]
-        public void AddingWithBigOrLittlePosition()
+        public void AddingWithBigOrLittlePositionTest()
         {
             UniqueList.List<int> list = new();
             list.AddByPosition(18, -5);
@@ -43,6 +39,53 @@ namespace UniqueListTests
             list.AddByPosition(400, -4);
             Assert.IsTrue(list.Size == 4
                 && list.GetElementFromHead() == 400 && list.GetElementFromTail() == 30);
+        }
+
+        [Test]
+        public void RemoveFromNotEmptyListTest()
+        {
+            UniqueList.List<int> list = new();
+            list.AddByPosition(18, -5);
+            list.AddByPosition(20, 100);
+            list.AddByPosition(30, 200);
+            list.RemoveByPosition(0);
+            list.RemoveByPosition(1);
+            Assert.IsTrue(list.GetElementFromHead() == 20
+                && list.Size == 1 && list.GetElementFromTail() == 20);
+        }
+
+        [Test]
+        public void RemoveFromEmptyListTest()
+        {
+            UniqueList.List<int> list = new();
+            Assert.Throws<InvalidOperationException>(() => list.RemoveByPosition(0));
+        }
+
+        [Test]
+        public void RemoveFromStandartExistingPositionTest()
+        {
+            UniqueList.List<int> list = new();
+            list.AddByPosition(18, -5);
+            list.AddByPosition(20, 100);
+            list.AddByPosition(30, 200);
+            list.RemoveByPosition(1);
+            Assert.IsTrue(list.Size == 2 && list.GetElementFromHead() == 18
+                && list.GetElementFromTail() == 30);
+        }
+
+        [Test]
+        public void ChangeValuesByDifferentPositionsTest()
+        {
+            UniqueList.List<int> list = new();
+            list.AddByPosition(18, -5);
+            list.AddByPosition(20, 100);
+            list.AddByPosition(30, 200);
+            list.ChangeByPosition(0, 70);
+            list.ChangeByPosition(-5, 80);
+            list.ChangeByPosition(1, 2);
+            list.ChangeByPosition(2, 0);
+            Assert.IsTrue(list.Size == 3 && list.GetElementFromHead() == 80
+                && list.GetElementFromTail() == 0);
         }
     }
 }

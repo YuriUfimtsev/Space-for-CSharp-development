@@ -9,5 +9,8 @@ public class Program
         list.AddByPosition(21, 0);
         list.AddByPosition(22, 0);
         list.AddByPosition(1, 1);
+        list.RemoveByPosition(0);
+        list.RemoveByPosition(1);
+        list.RemoveByPosition(2);
     }
 }
