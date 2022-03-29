@@ -1,11 +1,18 @@
 ﻿namespace UniqueList;
 
+/// <summary>
+/// Class realizes the structure List.
+/// </summary>
+/// <typeparam name="T">Type for list values.</typeparam>
 public class List<T>
 {
     private ListElement<T>? head;
     private ListElement<T>? tail;
     private int sizeOfList;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="List{T}"/> class.
+    /// </summary>
     public List()
     {
         this.head = null;
@@ -13,11 +20,21 @@ public class List<T>
         this.sizeOfList = 0;
     }
 
+    /// <summary>
+    /// Gets size of the list.
+    /// </summary>
     public int Size
     {
         get { return this.sizeOfList; }
     }
 
+    /// <summary>
+    /// Mehod adds element in list by position.
+    /// </summary>
+    /// <param name="value">value to adding in list.</param>
+    /// <param name="position">position to element adding.</param>
+    /// <returns> true if element has been added in correct position.
+    /// False if element has been added in incorrect position.</returns>
     public virtual bool AddByPosition(T value, int position)
     {
         ListElement<T> newElement = new(value);
@@ -61,6 +78,13 @@ public class List<T>
         return true;
     }
 
+    /// <summary>
+    /// Method removes the element by position.
+    /// </summary>
+    /// <param name="position">position to element removing.</param>
+    /// <returns> true if element has been removed by correct position.
+    /// False if element has been removed by incorrect position.</returns>
+    /// <exception cref="IncorrectOperationException">throws exception if list is empty.</exception>
     public bool RemoveByPosition(int position)
     {
         if (this.head == null)
@@ -109,6 +133,12 @@ public class List<T>
         return true;
     }
 
+    /// <summary>
+    /// Method changes the element's value by position.
+    /// </summary>
+    /// <param name="position">position to element changing.</param>
+    /// <param name="newValue">newValue for changing.</param>
+    /// <exception cref="InvalidOperationException">throws exception if list is empty.</exception>
     public virtual void ChangeByPosition(int position, T newValue)
     {
         if (this.head == null)
@@ -135,6 +165,11 @@ public class List<T>
         currentElement.Value = newValue;
     }
 
+    /// <summary>
+    /// Method gets element from list's head.
+    /// </summary>
+    /// <returns>element from list's head.</returns>
+    /// <exception cref="InvalidOperationException">throws exception if list is empty.</exception>
     public T GetElementFromHead()
     {
         if (this.head == null)
@@ -145,6 +180,11 @@ public class List<T>
         return this.head.Value;
     }
 
+    /// <summary>
+    /// Method gets element from list's tail.
+    /// </summary>
+    /// <returns>element from list's head.</returns>
+    /// <exception cref="InvalidOperationException">throws exception if list is empty.</exception>
     public T GetElementFromTail()
     {
         if (this.tail == null)
@@ -155,6 +195,11 @@ public class List<T>
         return this.tail.Value;
     }
 
+    /// <summary>
+    /// Method checks how many same values are in list.
+    /// </summary>
+    /// <param name="value">value for search in list.</param>
+    /// <returns> count of same values and same value's position.</returns>
     internal (int CountOfValues, int ValuePositionInList) HowManyValuesInList(T value)
     {
         if (this.head == null)
