@@ -1,57 +1,50 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniqueList;
+﻿namespace UniqueList;
 
 public class List<T>
 {
-    ListElement<T>? head;
-    ListElement<T>? tail;
-    int sizeOfList;
-
-    public int Size
-    {
-        get { return sizeOfList; }
-    }
+    private ListElement<T>? head;
+    private ListElement<T>? tail;
+    private int sizeOfList;
 
     public List()
     {
-        head = null;
-        tail = null;
-        sizeOfList = 0;
+        this.head = null;
+        this.tail = null;
+        this.sizeOfList = 0;
     }
 
-    public bool AddByPosition(T value, int position)
+    public int Size
+    {
+        get { return this.sizeOfList; }
+    }
+
+    public virtual bool AddByPosition(T value, int position)
     {
         ListElement<T> newElement = new(value);
-        ++sizeOfList;
-        if (head == null)
+        ++this.sizeOfList;
+        if (this.head == null)
         {
-            head = newElement;
-            tail = newElement;
+            this.head = newElement;
+            this.tail = newElement;
             return position == 0;
         }
 
-        if (position > sizeOfList)
+        if (position >= this.sizeOfList)
         {
-            tail!.Next = newElement;
-            tail = tail!.Next;
+            this.tail!.Next = newElement;
+            this.tail = this.tail!.Next;
             return false;
         }
 
         if (position <= 0)
         {
-            ListElement<T> headElement = head;
+            ListElement<T> headElement = this.head;
             newElement.Next = headElement;
             this.head = newElement;
             return true;
         }
 
-        ListElement<T> currentElement = head;
+        ListElement<T> currentElement = this.head;
         for (int i = 0; i < position - 1; ++i)
         {
             currentElement = currentElement.Next!;
@@ -62,7 +55,7 @@ public class List<T>
         currentElement.Next = newElement;
         if (newElement.Next == null)
         {
-            tail = newElement;
+            this.tail = newElement;
         }
 
         return true;
@@ -70,34 +63,35 @@ public class List<T>
 
     public bool RemoveByPosition(int position)
     {
-        if (head == null)
+        if (this.head == null)
         {
-            throw new InvalidOperationException();
+            throw new IncorrectOperationException("The list hasn't contained elements");
         }
 
-        --sizeOfList;
-        if (sizeOfList == 0)
+        --this.sizeOfList;
+        if (this.sizeOfList == 0)
         {
-            head = null;
-            tail = null;
+            this.head = null;
+            this.tail = null;
             return position == 0;
         }
 
         if (position <= 0)
         {
-            head = head.Next;
+            this.head = this.head.Next;
             return false;
         }
 
-        ListElement<T> currentElement = head;
-        if (position > sizeOfList)
+        ListElement<T> currentElement = this.head;
+        if (position > this.sizeOfList)
         {
             while (currentElement.Next!.Next != null)
             {
                 currentElement = currentElement.Next;
             }
+
             currentElement.Next = null;
-            tail = currentElement;
+            this.tail = currentElement;
             return false;
         }
 
@@ -109,58 +103,88 @@ public class List<T>
         currentElement.Next = currentElement.Next!.Next;
         if (currentElement.Next == null)
         {
-            tail = currentElement;
+            this.tail = currentElement;
         }
 
         return true;
     }
 
-    public bool ChangeByPosition(int position, T newValue)
+    public virtual void ChangeByPosition(int position, T newValue)
     {
-        if (head == null)
+        if (this.head == null)
         {
             throw new InvalidOperationException();
         }
 
         if (position <= 0)
         {
-            head.Value = newValue;
-            return false;
+            this.head.Value = newValue;
         }
 
-        if (position >= sizeOfList - 1)
+        if (position >= this.sizeOfList - 1)
         {
-            tail!.Value = newValue;
-            return false;
+            this.tail!.Value = newValue;
         }
 
-        ListElement<T> currentElement = head;
+        ListElement<T> currentElement = this.head;
         for (int i = 0; i < position; ++i)
         {
             currentElement = currentElement.Next!;
         }
 
         currentElement.Value = newValue;
-        return true;
     }
 
     public T GetElementFromHead()
     {
-        if (head == null)
+        if (this.head == null)
         {
             throw new InvalidOperationException();
         }
 
-        return head.Value;
+        return this.head.Value;
     }
 
     public T GetElementFromTail()
     {
-        if (tail == null)
+        if (this.tail == null)
         {
             throw new InvalidOperationException();
         }
 
-        return tail.Value;
+        return this.tail.Value;
+    }
+
+    internal (int CountOfValues, int ValuePositionInList) HowManyValuesInList(T value)
+    {
+        if (this.head == null)
+        {
+            return (0, -1);
+        }
+
+        ListElement<T> currentElement = this.head;
+        int valuePositionInList = -1;
+        int listElementsIndex = 0;
+
+        int frequencyOfOccurrence = 0;
+        while (currentElement.Next != null)
+        {
+            if (Equals(currentElement.Value, value))
+            {
+                ++frequencyOfOccurrence;
+                valuePositionInList = listElementsIndex;
+            }
+
+            currentElement = currentElement.Next;
+            ++listElementsIndex;
+        }
+
+        if (Equals(currentElement.Value, value))
+        {
+            ++frequencyOfOccurrence;
+            valuePositionInList = listElementsIndex;
+        }
+
+        return (frequencyOfOccurrence, valuePositionInList);
     }
 }

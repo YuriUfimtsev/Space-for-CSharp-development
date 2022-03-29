@@ -5,7 +5,12 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniqueList", "UniqueList.csproj", "{EC5BD267-F20F-4DC4-AD90-BB5C6FA628E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniqueListTests", "..\UniqueListTests\UniqueListTests.csproj", "{7B6D09E7-3D34-40A6-AB90-2D0C4490F168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniqueListTests", "..\UniqueListTests\UniqueListTests.csproj", "{7B6D09E7-3D34-40A6-AB90-2D0C4490F168}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{583C9345-C516-4A23-ADEA-87FAE59EE3D0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
