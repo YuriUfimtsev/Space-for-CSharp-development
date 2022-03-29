@@ -2,7 +2,6 @@
 
 public class UniqueList<T> : List<T>
 {
-
     public override bool AddByPosition(T value, int position)
     {
         var (countOfSameValues, sameValuePosition) = this.HowManyValuesInList(value);
@@ -26,8 +25,8 @@ public class UniqueList<T> : List<T>
                 (countOfSameValues, sameValuePosition) = this.HowManyValuesInList(value);
                 if (countOfSameValues > 1)
                 {
-                    throw new IncorrectOperationException
-                    ("The list has already contained this element");
+                    throw new IncorrectOperationException(
+                        "The list has already contained this element");
                 }
 
                 return;

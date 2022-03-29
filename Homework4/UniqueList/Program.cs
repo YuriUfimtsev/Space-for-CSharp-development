@@ -1,9 +1,9 @@
 ﻿namespace UniqueList;
 
-using System;
-public class Program
+public static class Program
 {
-    public static void Main(string[] args)
+    private static void Main()
     {
+        Console.WriteLine("Unique list programme.");
     }
 }
