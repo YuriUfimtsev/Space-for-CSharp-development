@@ -124,7 +124,11 @@ internal static class BurrowsWheelerTransform
         for (var i = 1; i < suffixesArray.Length; ++i)
         {
             var j = i;
-            while (j >= 1 && string.Compare(basicString, suffixesArray[j - 1], basicString, suffixesArray[j],
+            while (j >= 1 && string.Compare(
+                basicString,
+                suffixesArray[j - 1],
+                basicString,
+                suffixesArray[j],
                 Math.Max(basicString.Length - suffixesArray[j], basicString.Length - suffixesArray[j - 1])) > 0)
             {
                 (suffixesArray[j - 1], suffixesArray[j]) =
