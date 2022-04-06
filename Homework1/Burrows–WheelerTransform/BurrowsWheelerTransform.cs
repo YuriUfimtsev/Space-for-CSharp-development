@@ -129,7 +129,7 @@ public static class BurrowsWheelerTransform
                 suffixesArray[j - 1],
                 basicString,
                 suffixesArray[j],
-                Math.Min(basicString.Length - suffixesArray[j], basicString.Length - suffixesArray[j - 1])) > 0)
+                Math.Max(basicString.Length - suffixesArray[j], basicString.Length - suffixesArray[j - 1])) > 0)
             {
                 (suffixesArray[j - 1], suffixesArray[j]) =
                     (suffixesArray[j], suffixesArray[j - 1]);

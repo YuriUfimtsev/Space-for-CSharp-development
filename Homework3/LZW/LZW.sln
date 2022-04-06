@@ -6,12 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LZW", "LZW.csproj", "{116763A7-00D9-4915-9970-C49B2A83753B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{642A87F6-6804-448C-818C-275229DF2F28}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trie", "..\..\Homework2\Trie\Trie.csproj", "{01CA5853-A35C-4704-B2AA-105F2A81F607}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Burrows–WheelerTransform", "..\..\Homework1\Burrows–WheelerTransform\Burrows–WheelerTransform.csproj", "{39BB83E3-7118-4894-AC9E-8DB916987B62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZWTests", "..\LZWTests\LZWTests.csproj", "{74CD615D-9DC5-4475-B90E-3DBF7492DB60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LZWTests", "..\LZWTests\LZWTests.csproj", "{74CD615D-9DC5-4475-B90E-3DBF7492DB60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
