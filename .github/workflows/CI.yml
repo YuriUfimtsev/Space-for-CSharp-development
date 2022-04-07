@@ -13,5 +13,7 @@ jobs:
           dotnet-version: '6.x'
       - name: Build
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet build $file.FullName}
+        shell: PowerShell
       - name: Run tests
         run: $slnInList = Get-ChildItem -Recurse -Filter '*.sln'; foreach ($file in $slnInList) {dotnet test $file.FullName}
+        shell: PowerShell
