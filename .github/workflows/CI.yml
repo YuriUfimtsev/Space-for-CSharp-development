@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix }}
       matrix: [windows-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
