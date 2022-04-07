@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Routers", "Routers.csproj", "{5A7A2D9F-C3AA-4E4C-B112-8CAAFB336BD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7FBE025A-99B8-44DF-B907-52C924B424FF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A7A2D9F-C3AA-4E4C-B112-8CAAFB336BD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7A2D9F-C3AA-4E4C-B112-8CAAFB336BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7A2D9F-C3AA-4E4C-B112-8CAAFB336BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7A2D9F-C3AA-4E4C-B112-8CAAFB336BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CFD78F4-5DC5-46F3-B24F-D6525E51F3BD}
+	EndGlobalSection
+EndGlobal
