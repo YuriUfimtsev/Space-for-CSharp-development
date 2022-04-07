@@ -1,10 +1,8 @@
 on: [push]
 
 jobs:
-  build-Windows:
-    runs-on: windows-latest
   build:
-    runs-on: ${{ matrix }}
+    runs-on: ${{ matrix.os }}
       matrix: [windows-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
