@@ -2,56 +2,109 @@
 
 public class Program
 {
-    public static void Main()
+    public static int Main(string[] args)
     {
-        var newGraph = new Graph();
-        var fileName = "..//..//topology.txt";
-        var adjacencyMatrix = new int[4, 4]
+        if (args.Length != 2)
         {
-            { 0, 0, 0, 0 },
-            { 15, 0, 0, 0 },
-            { 25, 18, 0, 0 },
-            { 30, 7, 50, 0 },
-        };
-        var result = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
+            Console.WriteLine("Incorrect input");
+            return 0;
+        }
+
+        var newGraph = new Graph();
+        var fileName = args[0];
+        var resultFileName = args[1];
+        var adjacencyMatrix = CreateAdjacencyMatrixFromFileData(fileName);
+        var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
+        FillResultFileFromAdjacencyMatrix(resultMatrix, resultFileName);
+        return 0;
     }
 
     public static int[,] CreateAdjacencyMatrixFromFileData(string fileName)
     {
-        var sizeOfMatrix = 0;
-        var line = String.Empty;
+        var maxMatrixElement = int.MinValue;
+        var line = string.Empty;
         using (StreamReader fileStreamForCountMatrixSize = new(fileName))
         {
             while ((line = fileStreamForCountMatrixSize.ReadLine()) != null)
             {
-                ++sizeOfMatrix;
+                var arrayOfStringElements = line!.Split();
+                var currentElement = 0;
+                for (var i = 0; i < arrayOfStringElements.Length; ++i)
+                {
+                    var isParsingCorrect = true;
+                    isParsingCorrect = int.TryParse(arrayOfStringElements[i], out currentElement);
+                    if (isParsingCorrect && currentElement > maxMatrixElement)
+                    {
+                        maxMatrixElement = currentElement;
+                    }
+                }
             }
         }
 
+        var sizeOfMatrix = maxMatrixElement;
         var adjacencyMatrix = new int[sizeOfMatrix, sizeOfMatrix];
         using (StreamReader fileStreamForCreateMatrix = new(fileName))
         {
-            for (int i = 0; i < sizeOfMatrix; ++i)
+            var lineFromTopology = string.Empty;
+            while ((lineFromTopology = fileStreamForCreateMatrix.ReadLine()) != null)
             {
-                var lineFromTopology = fileStreamForCreateMatrix.ReadLine();
                 var arrayOfStringElements = lineFromTopology!.Split();
-                for (int k = 1; k < arrayOfStringElements.Length; ++k)
+                var arrayOfStringElementsIndex = 1;
+                var firstIndexForAdjacencyMatrix = int.Parse(arrayOfStringElements[0].Substring(0, 1));
+                while (arrayOfStringElementsIndex < arrayOfStringElements.Length)
                 {
                     var secondNodeNumber = 0;
-                    bool isParsingCorrect = int.TryParse(arrayOfStringElements[k], out secondNodeNumber);
+                    bool isParsingCorrect = int.TryParse(
+                        arrayOfStringElements[arrayOfStringElementsIndex],
+                        out secondNodeNumber);
                     if (!isParsingCorrect)
                     {
                         throw new IncorrectInputException();
                     }
 
-                    var value = 0;
-                    //Следующим шагом из конструкции "(...)," достать число ... !!!!
-                    // И записать все это в матрицу смежности!!!
+                    ++arrayOfStringElementsIndex;
+                    var value = int.Parse(arrayOfStringElementsIndex == arrayOfStringElements.Length - 1
+                        ? arrayOfStringElements[arrayOfStringElementsIndex].Substring(1, 1)
+                        : arrayOfStringElements[arrayOfStringElementsIndex].Substring(1, 2));
+                    adjacencyMatrix[firstIndexForAdjacencyMatrix - 1, secondNodeNumber - 1] = value;
+                    ++arrayOfStringElementsIndex;
                 }
-
             }
         }
 
-
+        return adjacencyMatrix;
     }
+
+    public static void FillResultFileFromAdjacencyMatrix(int[,] adjacencyMatrix, string resultFileName)
+    {
+        using (StreamWriter fileStream = new(resultFileName))
+        {
+            for (var i = 0; i < adjacencyMatrix.GetLength(0); ++i)
+            {
+                var lineForResultFile = string.Empty;
+                var indexForAdjacencyMatrixString = 0;
+                var isNotNULLValuesInString = false;
+                lineForResultFile += (i + 1) + ": ";
+                while (indexForAdjacencyMatrixString < adjacencyMatrix.GetLength(1))
+                {
+                    if (adjacencyMatrix[i, indexForAdjacencyMatrixString] != 0)
+                    {
+                        isNotNULLValuesInString = true;
+                        lineForResultFile += (indexForAdjacencyMatrixString + 1) + " ("
+                            + adjacencyMatrix[i, indexForAdjacencyMatrixString] + ")";
+                        lineForResultFile += indexForAdjacencyMatrixString == adjacencyMatrix.GetLength(0) - 1
+                            ? " " : ", ";
+                    }
+
+                    ++indexForAdjacencyMatrixString;
+                }
+
+                if (isNotNULLValuesInString)
+                {
+                    fileStream.WriteLine(lineForResultFile);
+                }
+            }
+        }
+    }
+
 }
