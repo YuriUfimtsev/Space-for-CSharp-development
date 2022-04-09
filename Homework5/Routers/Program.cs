@@ -13,9 +13,18 @@ public class Program
         var newGraph = new Graph();
         var fileName = args[0];
         var resultFileName = args[1];
-        var adjacencyMatrix = CreateAdjacencyMatrixFromFileData(fileName);
-        var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
-        FillResultFileFromAdjacencyMatrix(resultMatrix, resultFileName);
+        try
+        {
+            var adjacencyMatrix = CreateAdjacencyMatrixFromFileData(fileName);
+            var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
+            FillResultFileFromAdjacencyMatrix(resultMatrix, resultFileName);
+        }
+        catch (IncorrectInputException exception)
+        {
+            Console.WriteLine(exception.Message);
+            Console.WriteLine("Incorrect data in file.");
+        }
+
         return 0;
     }
 
@@ -41,6 +50,11 @@ public class Program
             }
         }
 
+        if (maxMatrixElement == int.MinValue)
+        {
+            throw new IncorrectInputException();
+        }
+
         var sizeOfMatrix = maxMatrixElement;
         var adjacencyMatrix = new int[sizeOfMatrix, sizeOfMatrix];
         using (StreamReader fileStreamForCreateMatrix = new(fileName))
@@ -64,8 +78,12 @@ public class Program
 
                     ++arrayOfStringElementsIndex;
                     var value = int.Parse(arrayOfStringElementsIndex == arrayOfStringElements.Length - 1
-                        ? arrayOfStringElements[arrayOfStringElementsIndex].Substring(1, 1)
-                        : arrayOfStringElements[arrayOfStringElementsIndex].Substring(1, 2));
+                        ? arrayOfStringElements[arrayOfStringElementsIndex].Substring(
+                            1,
+                            arrayOfStringElements[arrayOfStringElementsIndex].Length - 2)
+                        : arrayOfStringElements[arrayOfStringElementsIndex].Substring(
+                            1,
+                            arrayOfStringElements[arrayOfStringElementsIndex].Length - 3));
                     adjacencyMatrix[firstIndexForAdjacencyMatrix - 1, secondNodeNumber - 1] = value;
                     ++arrayOfStringElementsIndex;
                 }
@@ -93,7 +111,7 @@ public class Program
                         lineForResultFile += (indexForAdjacencyMatrixString + 1) + " ("
                             + adjacencyMatrix[i, indexForAdjacencyMatrixString] + ")";
                         lineForResultFile += indexForAdjacencyMatrixString == adjacencyMatrix.GetLength(0) - 1
-                            ? " " : ", ";
+                            ? string.Empty : ", ";
                     }
 
                     ++indexForAdjacencyMatrixString;
@@ -101,6 +119,15 @@ public class Program
 
                 if (isNotNULLValuesInString)
                 {
+                    if (lineForResultFile.Length >= 2)
+                    {
+                        if (lineForResultFile[lineForResultFile.Length - 1] == ' '
+                            && lineForResultFile[lineForResultFile.Length - 2] == ',')
+                        {
+                            lineForResultFile = lineForResultFile.Substring(0, lineForResultFile.Length - 2);
+                        }
+                    }
+
                     fileStream.WriteLine(lineForResultFile);
                 }
             }

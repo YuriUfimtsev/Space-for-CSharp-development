@@ -1,6 +1,6 @@
 ﻿namespace Routers;
 
-internal class Graph
+public class Graph
 {
     private Edge[]? edgesArray;
     private int indexOfEdgesArray;
@@ -73,8 +73,21 @@ internal class Graph
         this.SortArrayOfEdges(ref this.edgesArray);
         var listOfOptimalGraphNodes = new List<int>();
         var resultArrayOfEdges = new Edge[this.edgesArray.Length];
-        var indexOfResultEdgesArray = 0;
-        var currentEdgesArrayIndex = 0;
+        var listOfEdges = new LinkedList<Edge>();
+        var indexForList = 0;
+        while (this.edgesArray[indexForList] != null)
+        {
+            listOfEdges.AddLast(this.edgesArray[indexForList]);
+            ++indexForList;
+        }
+
+        listOfOptimalGraphNodes.Add(listOfEdges.First().FirstNode);
+        listOfOptimalGraphNodes.Add(listOfEdges.First().SecondNode);
+        resultArrayOfEdges[0] = listOfEdges.First();
+        listOfEdges.RemoveFirst();
+
+        var indexOfResultEdgesArray = 1;
+        var currentEdgesArrayIndex = 1;
         while (listOfOptimalGraphNodes.Count < this.countsOfNodes)
         {
             if (currentEdgesArrayIndex >= this.indexOfEdgesArray)
@@ -82,28 +95,44 @@ internal class Graph
                 throw new Exception("????????????????????????");
             }
 
-            var currentEdge = this.edgesArray[currentEdgesArrayIndex];
-            if (!(listOfOptimalGraphNodes.Contains(currentEdge.FirstNode)
-                && listOfOptimalGraphNodes.Contains(currentEdge.SecondNode)))
+            var currentListOfEdgesElement = listOfEdges.First;
+            if (currentListOfEdgesElement == null)
             {
-                if (!listOfOptimalGraphNodes.Contains(currentEdge.FirstNode))
+                throw new Exception("????????????????????????");
+            }
+
+            while (!(listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.FirstNode)
+                ^ listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.SecondNode)))
+            {
+                if (currentListOfEdgesElement.Next == null)
                 {
-                    listOfOptimalGraphNodes.Add(currentEdge.FirstNode);
+                    throw new Exception("????????????????????????");
                 }
 
-                if (!listOfOptimalGraphNodes.Contains(currentEdge.SecondNode))
+                currentListOfEdgesElement = currentListOfEdgesElement.Next;
+            }
+
+            if (listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.FirstNode)
+                ^ listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.SecondNode))
+            {
+                if (!listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.FirstNode))
                 {
-                    listOfOptimalGraphNodes.Add(currentEdge.SecondNode);
+                    listOfOptimalGraphNodes.Add(currentListOfEdgesElement.Value.FirstNode);
                 }
 
-                resultArrayOfEdges[indexOfResultEdgesArray++] = currentEdge;
+                if (!listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.SecondNode))
+                {
+                    listOfOptimalGraphNodes.Add(currentListOfEdgesElement.Value.SecondNode);
+                }
+
+                resultArrayOfEdges[indexOfResultEdgesArray++] = currentListOfEdgesElement.Value;
+                listOfEdges.Remove(currentListOfEdgesElement);
             }
 
             ++currentEdgesArrayIndex;
         }
 
         this.realSizeOfResultEdgesArray = indexOfResultEdgesArray;
-
         return resultArrayOfEdges;
     }
 
