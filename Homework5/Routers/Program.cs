@@ -1,6 +1,7 @@
 ﻿namespace Routers;
+using System.Text;
 
-public class Program
+public static class Program
 {
     public static int Main(string[] args)
     {
@@ -104,19 +105,19 @@ public class Program
         {
             for (var i = 0; i < adjacencyMatrix.GetLength(0); ++i)
             {
-                var lineForResultFile = string.Empty;
+                var lineForResultFile = new StringBuilder();
                 var indexForAdjacencyMatrixString = 0;
                 var isNotNULLValuesInString = false;
-                lineForResultFile += (i + 1) + ": ";
+                lineForResultFile.Append((i + 1) + ": ");
                 while (indexForAdjacencyMatrixString < adjacencyMatrix.GetLength(1))
                 {
                     if (adjacencyMatrix[i, indexForAdjacencyMatrixString] != 0)
                     {
                         isNotNULLValuesInString = true;
-                        lineForResultFile += (indexForAdjacencyMatrixString + 1) + " ("
-                            + adjacencyMatrix[i, indexForAdjacencyMatrixString] + ")";
-                        lineForResultFile += indexForAdjacencyMatrixString == adjacencyMatrix.GetLength(0) - 1
-                            ? string.Empty : ", ";
+                        lineForResultFile.Append((indexForAdjacencyMatrixString + 1) + " ("
+                            + adjacencyMatrix[i, indexForAdjacencyMatrixString] + ")");
+                        lineForResultFile.Append(indexForAdjacencyMatrixString == adjacencyMatrix.GetLength(0) - 1
+                            ? string.Empty : ", ");
                     }
 
                     ++indexForAdjacencyMatrixString;
@@ -129,7 +130,7 @@ public class Program
                         if (lineForResultFile[lineForResultFile.Length - 1] == ' '
                             && lineForResultFile[lineForResultFile.Length - 2] == ',')
                         {
-                            lineForResultFile = lineForResultFile.Substring(0, lineForResultFile.Length - 2);
+                            lineForResultFile.Remove(lineForResultFile.Length - 2, 2);
                         }
                     }
 

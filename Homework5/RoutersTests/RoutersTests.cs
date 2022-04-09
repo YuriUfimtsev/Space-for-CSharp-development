@@ -63,7 +63,6 @@ public class RoutersTests
     [Test]
     public void TestWithEmptyFile()
     {
-        var newGraph = new Graph();
         var adjacencyMatrix = new int[1, 1];
         Assert.Throws<IncorrectInputException>(()
             => adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("..\\..\\..\\EmptyFile.txt"));
