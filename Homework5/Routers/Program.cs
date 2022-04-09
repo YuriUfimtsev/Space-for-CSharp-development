@@ -19,6 +19,11 @@ public class Program
             var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
             FillResultFileFromAdjacencyMatrix(resultMatrix, resultFileName);
         }
+        catch (NotCoherentTopologyException exception)
+        {
+            Console.Error.WriteLine("Topology from file isn't coherent.");
+            return -1;
+        }
         catch (IncorrectInputException exception)
         {
             Console.WriteLine(exception.Message);

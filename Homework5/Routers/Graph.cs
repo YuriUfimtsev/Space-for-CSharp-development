@@ -67,7 +67,7 @@ public class Graph
     {
         if (this.edgesArray == null || this.edgesArray.Length == 0)
         {
-            throw new InvalidDataException("Incorrect input data");
+            throw new IncorrectInputException("Incorrect input data");
         }
 
         this.SortArrayOfEdges(ref this.edgesArray);
@@ -92,13 +92,13 @@ public class Graph
         {
             if (currentEdgesArrayIndex >= this.indexOfEdgesArray)
             {
-                throw new Exception("????????????????????????");
+                throw new NotCoherentTopologyException();
             }
 
             var currentListOfEdgesElement = listOfEdges.First;
             if (currentListOfEdgesElement == null)
             {
-                throw new Exception("????????????????????????");
+                throw new NotCoherentTopologyException();
             }
 
             while (!(listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.FirstNode)
@@ -106,7 +106,7 @@ public class Graph
             {
                 if (currentListOfEdgesElement.Next == null)
                 {
-                    throw new Exception("????????????????????????");
+                    throw new NotCoherentTopologyException();
                 }
 
                 currentListOfEdgesElement = currentListOfEdgesElement.Next;
