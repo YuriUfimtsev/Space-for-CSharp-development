@@ -1,8 +1,16 @@
 ﻿namespace Routers;
 using System.Text;
 
+/// <summary>
+/// Class with Main method.
+/// </summary>
 public static class Program
 {
+    /// <summary>
+    /// Main method. Launches a set of methods.
+    /// </summary>
+    /// <param name="args">parameters from command line.</param>
+    /// <returns>0 if programm finishes correctly. else not 0.</returns>
     public static int Main(string[] args)
     {
         if (args.Length != 2)
@@ -20,7 +28,7 @@ public static class Program
             var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
             FillResultFileFromAdjacencyMatrix(resultMatrix, resultFileName);
         }
-        catch (NotCoherentTopologyException exception)
+        catch (NotCoherentTopologyException)
         {
             Console.Error.WriteLine("Topology from file isn't coherent.");
             return -1;
@@ -34,6 +42,12 @@ public static class Program
         return 0;
     }
 
+    /// <summary>
+    /// Method create adjacency matrix from file's data.
+    /// </summary>
+    /// <param name="fileName">path to file.</param>
+    /// <returns>result adjacency matrix.</returns>
+    /// <exception cref="IncorrectInputException">throws this exception if file contains incorrect data.</exception>
     public static int[,] CreateAdjacencyMatrixFromFileData(string fileName)
     {
         var maxMatrixElement = int.MinValue;
@@ -99,6 +113,11 @@ public static class Program
         return adjacencyMatrix;
     }
 
+    /// <summary>
+    /// Method fill in result file from adjacency matrix.
+    /// </summary>
+    /// <param name="adjacencyMatrix">input matrix.</param>
+    /// <param name="resultFileName">path to result file.</param>
     public static void FillResultFileFromAdjacencyMatrix(int[,] adjacencyMatrix, string resultFileName)
     {
         using (StreamWriter fileStream = new(resultFileName))
@@ -139,5 +158,4 @@ public static class Program
             }
         }
     }
-
 }

@@ -1,5 +1,8 @@
 ﻿namespace Routers;
 
+/// <summary>
+/// Realizes struct Graph.
+/// </summary>
 public class Graph
 {
     private Edge[]? edgesArray;
@@ -8,6 +11,11 @@ public class Graph
     private int[,]? resultAdjacencyMatrix;
     private int realSizeOfResultEdgesArray;
 
+    /// <summary>
+    /// Creates new matrix after working with another matrix and building optimal graph.
+    /// </summary>
+    /// <param name="adjacencyMatrix">matrix for handling.</param>
+    /// <returns>adjacency matrix from optimal graph.</returns>
     public int[,] GetResultAdjacencyMatrix(int[,] adjacencyMatrix)
     {
         this.ConvertAdjacencyMatrixToTheEdgeArray(adjacencyMatrix);
