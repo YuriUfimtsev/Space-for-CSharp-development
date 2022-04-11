@@ -7,7 +7,7 @@ using System.Collections;
 public class Trie
 {
     private TrieElement head = new();
-    private TrieElement? triePointer = new();
+    private TrieElement? triePointer = null;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Trie"/> class.
@@ -20,10 +20,7 @@ public class Trie
     /// <summary>
     /// Gets the size of the TrieElement.
     /// </summary>
-    public int Size
-    {
-        get { return this.head.SizeOfTrieElement; }
-    }
+    public int Size => this.head.SizeOfTrieElement;
 
     /// <summary>
     /// Method adds the element into Trie.
@@ -32,7 +29,7 @@ public class Trie
     /// <returns>True if the stringElement hasn't been previously consisted in Trie. Else false.</returns>
     public bool Add(string stringElement)
     {
-        if (this.Contains(stringElement) || stringElement.Length == 0 || stringElement == null)
+        if (stringElement == null || stringElement.Length == 0 || this.Contain(stringElement))
         {
             return false;
         }
@@ -48,7 +45,8 @@ public class Trie
             {
                 if (!currentElement!.IsTerminal)
                 {
-                    return currentElement.IsTerminal = true;
+                    currentElement.IsTerminal = true;
+                    return true;
                 }
             }
 
@@ -66,6 +64,10 @@ public class Trie
         return currentElement!.IsTerminal = true;
     }
 
+    /// <summary>
+    /// Method adds char type elment in Trie.
+    /// </summary>
+    /// <param name="newElement">element to adding.</param>
     public void AddWithPointer(char newElement)
     {
         TrieElement? currentElement = this.triePointer;
@@ -98,7 +100,7 @@ public class Trie
     /// </summary>
     /// <param name="stringElement">The string type element to check.</param>
     /// <returns>True if element contains in Trie. Else false.</returns>
-    public bool Contains(string stringElement)
+    public bool Contain(string stringElement)
     {
         if (stringElement.Length == 0 || stringElement == null)
         {
@@ -128,7 +130,7 @@ public class Trie
     /// <returns>True if element has been contained in the Trie. Else false.</returns>
     public bool Remove(string stringElement)
     {
-        if (!this.Contains(stringElement) || stringElement.Length == 0 || stringElement == null)
+        if (!this.Contain(stringElement) || stringElement.Length == 0 || stringElement == null)
         {
             return false;
         }
@@ -189,7 +191,7 @@ public class Trie
     /// <summary>
     /// Nested class. Presents the elements of "Trie" class.
     /// </summary>
-    public class TrieElement
+    private class TrieElement
     {
         private int sizeOfTrieElement = 0;
         private bool isTerminal = false;
@@ -207,54 +209,21 @@ public class Trie
         /// <summary>
         /// Gets or sets the size of TrieElement.
         /// </summary>
-        internal int SizeOfTrieElement
-        {
-            get
-            {
-                return this.sizeOfTrieElement;
-            }
-
-            set
-            {
-                this.sizeOfTrieElement = value;
-            }
-        }
+        internal int SizeOfTrieElement { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether is this element terminal.
         /// </summary>
-        internal bool IsTerminal
-        {
-            get
-            {
-                return this.isTerminal;
-            }
-
-            set
-            {
-                this.isTerminal = value;
-            }
-        }
+        internal bool IsTerminal { get; set; }
 
         /// <summary>
         /// Gets or sets a hashtable of vertexes.
         /// </summary>
         internal Hashtable Vertexes
         {
-            get
-            {
-                return this.vertexes;
-            }
-
-            set
-            {
-                this.vertexes = value;
-            }
+            get { return this.vertexes; } set { this.Vertexes = value; }
         }
 
-        internal int VertexValue
-        {
-            get { return this.vertexValue; } set { this.vertexValue = value; }
-        }
+        internal int VertexValue { get; set; }
     }
 }
