@@ -25,7 +25,7 @@ public class Trie
     /// <summary>
     /// Method adds the element into Trie.
     /// </summary>
-    /// <param name="stringElement">The string type element to adding.</param>
+    /// <param name="stringElement">The string type element to add.</param>
     /// <returns>True if the stringElement hasn't been previously consisted in Trie. Else false.</returns>
     public bool Add(string stringElement)
     {
@@ -67,7 +67,7 @@ public class Trie
     /// <summary>
     /// Method adds char type elment in Trie.
     /// </summary>
-    /// <param name="newElement">element to adding.</param>
+    /// <param name="newElement">element to add.</param>
     public void AddWithPointer(char newElement)
     {
         TrieElement? currentElement = this.triePointer;
@@ -126,7 +126,7 @@ public class Trie
     /// <summary>
     /// Method removes the element from the Trie.
     /// </summary>
-    /// <param name="stringElement">The string type element to removing.</param>
+    /// <param name="stringElement">The string type element to remove.</param>
     /// <returns>True if element has been contained in the Trie. Else false.</returns>
     public bool Remove(string stringElement)
     {
@@ -193,37 +193,32 @@ public class Trie
     /// </summary>
     private class TrieElement
     {
-        private int sizeOfTrieElement = 0;
-        private bool isTerminal = false;
-        private Hashtable vertexes;
-        private int vertexValue = 0;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TrieElement"/> class.
         /// </summary>
         public TrieElement()
         {
-            this.vertexes = new Hashtable();
+            this.Vertexes = new Dictionary<char, TrieElement>();
+            this.SizeOfTrieElement = 0;
+            this.IsTerminal = false;
+            this.VertexValue = 0;
         }
 
         /// <summary>
         /// Gets or sets the size of TrieElement.
         /// </summary>
-        internal int SizeOfTrieElement { get; set; }
+        public int SizeOfTrieElement { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether is this element terminal.
         /// </summary>
-        internal bool IsTerminal { get; set; }
+        public bool IsTerminal { get; set; }
 
         /// <summary>
         /// Gets or sets a hashtable of vertexes.
         /// </summary>
-        internal Hashtable Vertexes
-        {
-            get { return this.vertexes; } set { this.Vertexes = value; }
-        }
+        public Dictionary<char, TrieElement> Vertexes { get; set; }
 
-        internal int VertexValue { get; set; }
+        public int VertexValue { get; set; }
     }
 }
