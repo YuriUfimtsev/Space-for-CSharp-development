@@ -6,8 +6,8 @@ using System.Collections;
 /// </summary>
 public class Trie
 {
-    private TrieElement head = new();
-    private TrieElement? triePointer = null;
+    private readonly TrieElement head = new();
+    private TrieElement? triePointer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Trie"/> class.
@@ -138,15 +138,10 @@ public class Trie
         var stringElementIndex = 0;
         TrieElement? currentElement = this.head;
 
-        var elementWithLastTermainalPointer = currentElement.Vertexes[stringElement[0]] as TrieElement;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
             --currentElement.SizeOfTrieElement;
             currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
-            if (currentElement!.IsTerminal)
-            {
-                elementWithLastTermainalPointer = currentElement;
-            }
 
             if (stringElementIndex == stringElement.Length - 1)
             {
