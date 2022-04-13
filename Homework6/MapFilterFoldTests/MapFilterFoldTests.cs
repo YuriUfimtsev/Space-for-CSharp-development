@@ -8,25 +8,27 @@ public class MapFilterFoldTests
 {
     private readonly List<string> stringList = new(){ "a", "b", "c", "aa", "ab" };
     private readonly List<int> intList = new(){ 1, 2, 3, 4, 5, 6 };
-    private List<int>? resultIntList;
-    private List<string>? resultStringList;
 
     [Test]
     public void StandartMapTest()
     {
+        List<int> resultIntList = new();
+        List<string> resultStringList = new();
         resultIntList = MapFilterFoldFunctions<int>.Map(intList, x => x * 2);
-        Assert.AreEqual(resultIntList, new List<int>() { 2, 4, 6, 8, 10, 12 });
+        Assert.AreEqual(resultIntList, new List<int> { 2, 4, 6, 8, 10, 12 });
         resultStringList = MapFilterFoldFunctions<string>.Map(stringList, x => x += "k");
-        Assert.AreEqual(resultStringList, new List<string>() { "ak", "bk", "ck", "aak", "abk" });
+        Assert.AreEqual(resultStringList, new List<string> { "ak", "bk", "ck", "aak", "abk" });
     }
 
     [Test]
     public void StandartFilterTest()
     {
+        List<int> resultIntList = new();
+        List<string> resultStringList = new();
         resultIntList = MapFilterFoldFunctions<int>.Filter(intList, x => x % 2 == 0);
-        Assert.AreEqual(resultIntList, new List<int>() { 2, 4, 6 });
+        Assert.AreEqual(resultIntList, new List<int> { 2, 4, 6 });
         resultStringList = MapFilterFoldFunctions<string>.Filter(stringList, x => string.Equals(x, "a"));
-        Assert.AreEqual(resultStringList, new List<string>() { "a" });
+        Assert.AreEqual(resultStringList, new List<string> { "a" });
     }
 
     [Test]

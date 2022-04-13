@@ -4,7 +4,7 @@
 /// Class contains functions "Map", "Filter" and "Fold".
 /// </summary>
 /// <typeparam name="T">the type with which the functions will work.</typeparam>
-public class MapFilterFoldFunctions<T>
+public static class MapFilterFoldFunctions<T>
 {
     /// <summary>
     /// Function creates a new list using list elements and a function for each list element.
