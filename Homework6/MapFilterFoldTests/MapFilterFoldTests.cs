@@ -12,22 +12,18 @@ public class MapFilterFoldTests
     [Test]
     public void StandartMapTest()
     {
-        List<int> resultIntList = new();
-        List<string> resultStringList = new();
-        resultIntList = MapFilterFoldFunctions<int>.Map(intList, x => x * 2);
+        var resultIntList = MapFilterFoldFunctions<int>.Map(intList, x => x * 2);
         Assert.AreEqual(resultIntList, new List<int> { 2, 4, 6, 8, 10, 12 });
-        resultStringList = MapFilterFoldFunctions<string>.Map(stringList, x => x += "k");
+        var resultStringList = MapFilterFoldFunctions<string>.Map(stringList, x => x += "k");
         Assert.AreEqual(resultStringList, new List<string> { "ak", "bk", "ck", "aak", "abk" });
     }
 
     [Test]
     public void StandartFilterTest()
     {
-        List<int> resultIntList = new();
-        List<string> resultStringList = new();
-        resultIntList = MapFilterFoldFunctions<int>.Filter(intList, x => x % 2 == 0);
+        var resultIntList = MapFilterFoldFunctions<int>.Filter(intList, x => x % 2 == 0);
         Assert.AreEqual(resultIntList, new List<int> { 2, 4, 6 });
-        resultStringList = MapFilterFoldFunctions<string>.Filter(stringList, x => string.Equals(x, "a"));
+        var resultStringList = MapFilterFoldFunctions<string>.Filter(stringList, x => string.Equals(x, "a"));
         Assert.AreEqual(resultStringList, new List<string> { "a" });
     }
 
