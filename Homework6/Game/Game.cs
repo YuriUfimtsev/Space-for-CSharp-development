@@ -7,7 +7,7 @@ public class Game
 
     public (int, int) CurrentMatrixPosition { get; set; }
 
-    public void OnLeft(object sendler, EventArgs args)
+    public void OnLeft(object? sendler, EventArgs args)
     {
         if (this.CurrentMatrixPosition.Item2 - 1 >= 0
             && mapMatrix![this.CurrentMatrixPosition.Item1, this.CurrentMatrixPosition.Item2 - 1] == ' ')
@@ -16,7 +16,7 @@ public class Game
         }
     }
 
-    public void OnRight(object sendler, EventArgs args)
+    public void OnRight(object? sendler, EventArgs args)
     {
         if (this.CurrentMatrixPosition.Item2 + 1 < mapMatrix!.GetLength(1)
             && mapMatrix![this.CurrentMatrixPosition.Item1, this.CurrentMatrixPosition.Item2 + 1] == ' ')
@@ -25,7 +25,7 @@ public class Game
         }
     }
 
-    public void Up(object sendler, EventArgs args)
+    public void Up(object? sendler, EventArgs args)
     {
         if (this.CurrentMatrixPosition.Item1 - 1 >= 0
             && mapMatrix![this.CurrentMatrixPosition.Item1 - 1, this.CurrentMatrixPosition.Item2] == ' ')
@@ -34,7 +34,7 @@ public class Game
         }
     }
 
-    public void Down(object sendler, EventArgs args)
+    public void Down(object? sendler, EventArgs args)
     {
         if (this.CurrentMatrixPosition.Item1 + 1 < mapMatrix!.GetLength(0)
             && mapMatrix![this.CurrentMatrixPosition.Item1 + 1, this.CurrentMatrixPosition.Item2] == ' ')
@@ -109,7 +109,7 @@ public class Game
         SetCursor(this.CurrentMatrixPosition);
     }
 
-    public void UpdateCursorPosition(object sendler, EventArgs args)
+    public void UpdateCursorPosition(object? sendler, EventArgs args)
     {
         Console.Write(" ");
         SetCursor((this.CurrentMatrixPosition));

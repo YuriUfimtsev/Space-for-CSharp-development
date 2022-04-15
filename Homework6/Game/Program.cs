@@ -11,7 +11,7 @@ try
     game.PrintMapMatrix();
 }
 
-catch (InvalidDataException exception)
+catch (InvalidDataException)
 {
     Console.WriteLine("Incorrect map.");
 }
