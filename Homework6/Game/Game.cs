@@ -54,7 +54,7 @@ public class Game
 
         var countOfColumns = line.Length;
         var countOfLines = 1;
-        while ((line = streamReader.ReadLine()) != null)
+        while (streamReader.ReadLine() != null)
         {
             ++countOfLines;
         }

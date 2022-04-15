@@ -29,8 +29,6 @@ public class EventLoop
                 case ConsoleKey.DownArrow:
                     BottomHandler(this, EventArgs.Empty);
                     break;
-                default:
-                    break;
             }
         }
     }
