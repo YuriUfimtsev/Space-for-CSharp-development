@@ -3,14 +3,29 @@
 var eventLoop = new EventLoop();
 var game = new Game.Game();
 
-var pathToFile = "C:\\Users\\Home\\source\\repos\\Space-for-CSharp-development\\Homework6\\Game\\Map.txt";
-game.CreateMatrixFromFileMap(pathToFile);
-game.PrintMapMatrix();
+var pathToFile = "..\\..\\..\\Map.txt";
+
+try
+{
+    game.CreateMatrixFromFileMap(pathToFile);
+    game.PrintMapMatrix();
+}
+
+catch (InvalidDataException exception)
+{
+    Console.WriteLine("Incorrect map.");
+}
 
 eventLoop.LeftHandler += game.OnLeft;
-eventLoop.RightHandler += game.OnRight;
-eventLoop.TopHandler += game.Up;
-eventLoop.BottomHandler += game.Down;
+eventLoop.LeftHandler += game.UpdateCursorPosition;
 
+eventLoop.RightHandler += game.OnRight;
+eventLoop.RightHandler += game.UpdateCursorPosition;
+
+eventLoop.TopHandler += game.Up;
+eventLoop.TopHandler += game.UpdateCursorPosition;
+
+eventLoop.BottomHandler += game.Down;
+eventLoop.BottomHandler += game.UpdateCursorPosition;
 
 eventLoop.Run();
