@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Calculator
+namespace Calculator;
+internal static class Program
 {
-    internal static class Program
+    /// <summary>
+    ///  The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-        }
+        Calculator calculator = new Calculator();
+        calculator.CreateStateTableFromFile("..//..//..//StateTable.txt");
+        calculator.Calculate('3');
+        calculator.Calculate('4');
+        calculator.Calculate('+');
+        calculator.Calculate('1');
+        calculator.Calculate('-');
+        // To customize application configuration such as set high DPI settings or default font,
+        // see https://aka.ms/applicationconfiguration.
+        //ApplicationConfiguration.Initialize();
+        //Application.Run(new Form1());
     }
 }
