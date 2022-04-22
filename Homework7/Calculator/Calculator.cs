@@ -13,9 +13,10 @@ public class Calculator
     private StringBuilder currentNumber;
     private char currentOperator;
 
-    public Calculator()
+    public Calculator(string pathToStateTable)
     {
         currentNumber = new StringBuilder();
+        CreateStateTableFromFile(pathToStateTable);
     }
 
     private bool IsNumber(char symbol)
@@ -28,20 +29,38 @@ public class Calculator
         => this.currentOperator switch
         {
             '+' => (this.CalculationResult + secondOperand, true),
+            '-' => (this.CalculationResult - secondOperand, true),
             '*' => (this.CalculationResult * secondOperand, true),
             '/' => secondOperand == 0 ? (0, false) : (this.CalculationResult / secondOperand, true),
             _ => (secondOperand, true)
         };
 
-    public void CreateStateTableFromFile(string pathToFile)
+    private void CreateStateTableFromFile(string pathToFile)
     {
-        var TemporaryStateTable = new int[3, 4];
-        using (StreamReader fileStream = new(pathToFile))
+        var countOfLinesWithStates = 0;
+        var lengthOfLine = 0;
+        using (StreamReader fileStreamToCalculateTheDimensions = new(pathToFile))
         {
-            var line = fileStream.ReadLine();
-            for (var i = 0; i < 3; ++i)
+            var line = fileStreamToCalculateTheDimensions.ReadLine();
+            if (line == null)
             {
-                line = fileStream.ReadLine();
+                throw new InvalidDataException();
+            }
+
+            lengthOfLine = line.Length;
+            while ((line = fileStreamToCalculateTheDimensions.ReadLine()) != null)
+            {
+                ++countOfLinesWithStates;
+            }
+        }
+
+        var TemporaryStateTable = new int[countOfLinesWithStates, lengthOfLine];
+        using (StreamReader fileStreamToCreateStateTable = new(pathToFile))
+        {
+            var line = fileStreamToCreateStateTable.ReadLine();
+            for (var i = 0; i < countOfLinesWithStates; ++i)
+            {
+                line = fileStreamToCreateStateTable.ReadLine();
                 var lineSymbols = line!.Split();
                 for (var j = 0; j < lineSymbols.Length; ++j)
                 {
@@ -77,6 +96,14 @@ public class Calculator
         }
 
         return result;
+    }
+
+    public void ClearCalculatorStream()
+    {
+        this.State = 0;
+        this.CalculationResult = 0;
+        this.currentNumber.Clear();
+        this.currentOperator = ' ';
     }
 
     public void Calculate(char symbol)
@@ -120,6 +147,8 @@ public class Calculator
                     }
 
                     this.currentNumber.Clear();
+                    this.currentNumber.Append(this.CalculationResult);
+                    this.currentOperator = ' ';
                 }
                 else
                 {
@@ -129,6 +158,8 @@ public class Calculator
                 break;
             case 4:
                 this.currentNumber.Clear();
+                this.currentOperator = ' ';
+                State = 0;
                 throw new InvalidOperationException();
         }
     }

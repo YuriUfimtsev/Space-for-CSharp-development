@@ -7,9 +7,8 @@ internal static class Program
     [STAThread]
     static void Main()
     {
-        Calculator calculator = new Calculator();
-        calculator.CreateStateTableFromFile("..//..//..//StateTable.txt");
-        calculator.Calculate('3');
+        Calculator calculator = new Calculator("..//..//..//StateTable.txt");
+        calculator.Calculate('1');
         calculator.Calculate('4');
         calculator.Calculate('+');
         calculator.Calculate('1');
