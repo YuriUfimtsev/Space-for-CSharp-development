@@ -1,7 +1,8 @@
-using NUnit.Framework;
 using Calculator;
 
 namespace CalculatorTests;
+
+using NUnit.Framework;
 
 public class CalculatorTests
 {
