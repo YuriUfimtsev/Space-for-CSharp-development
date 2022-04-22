@@ -7,10 +7,10 @@ using System.Text;
 /// </summary>
 public class Calculator
 {
+    private readonly StringBuilder currentNumber;
     private int calculationResult;
     private int[,]? stateTable;
     private int state;
-    private StringBuilder currentNumber;
     private char currentOperator;
 
     /// <summary>
@@ -123,6 +123,8 @@ public class Calculator
                 this.currentOperator = ' ';
                 this.state = 0;
                 throw new InvalidOperationException();
+            default:
+                break;
         }
     }
 

@@ -1,12 +1,10 @@
-using Calculator;
-
 namespace CalculatorTests;
 
 using NUnit.Framework;
 
 public class CalculatorTests
 {
-    private string pathToStateTable = "..\\..\\..\\..\\Calculator\\StateTable.txt";
+    private readonly string pathToStateTable = "..\\..\\..\\..\\Calculator\\StateTable.txt";
 
     [Test]
     public void StandartTestWithAddition()

@@ -5,7 +5,7 @@ namespace Calculator;
 /// </summary>
 public partial class CalculatorUserInterfaceForm : Form
 {
-    private Calculator calculator;
+    private readonly Calculator calculator;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CalculatorUserInterfaceForm"/> class.
