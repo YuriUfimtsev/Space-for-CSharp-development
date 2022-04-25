@@ -46,8 +46,8 @@ namespace Clock
                 125 + 110 * (float)Math.Sin(2 * Math.PI / 60 * DateTime.Now.Minute),
                 125 - 110 * (float)Math.Cos((2 * Math.PI / 60 * DateTime.Now.Minute)));
             graphics.DrawLine(secondHand, 125, 125,
-                125 + 125 * (float)Math.Cos(2 * Math.PI / 60 * DateTime.Now.Second),
-                125 + 125 * (float)Math.Sin((2 * Math.PI / 60 * DateTime.Now.Second)));
+                125 + 125 * (float)Math.Sin(2 * Math.PI / 60 * DateTime.Now.Second),
+                125 - 125 * (float)Math.Cos((2 * Math.PI / 60 * DateTime.Now.Second)));
         }
 
         private void SecondTimerTick(object sender, EventArgs e)
