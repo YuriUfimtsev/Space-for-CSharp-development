@@ -7,7 +7,6 @@
 public class PriorityQueue<T>
 {
     private PriorityQueueItem<T>? head;
-    private PriorityQueueItem<T>? tail;
 
     /// <summary>
     /// Gets a value indicating whether the queue is empty.
@@ -28,7 +27,6 @@ public class PriorityQueue<T>
         if (this.head == null)
         {
             this.head = priorityQueueItem;
-            this.tail = priorityQueueItem;
             return;
         }
 
@@ -52,11 +50,6 @@ public class PriorityQueue<T>
             currentItem = currentItem.NextItem;
         }
 
-        if (currentItem.NextItem == null)
-        {
-            this.tail = priorityQueueItem;
-        }
-
         (currentItem.NextItem, priorityQueueItem.NextItem) = (priorityQueueItem, currentItem.NextItem);
     }
 
@@ -73,16 +66,12 @@ public class PriorityQueue<T>
         }
 
         T item = this.head.Value;
-        if (this.head == this.tail)
-        {
-            this.tail = null;
-        }
 
         this.head = this.head.NextItem;
         return item;
     }
 
-    private class PriorityQueueItem<T>
+    private class PriorityQueueItem<TypeForPriorityQueueItem>
     {
         public PriorityQueueItem(int priority, T value)
         {
