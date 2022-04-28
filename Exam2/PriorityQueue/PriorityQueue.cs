@@ -51,6 +51,7 @@ public class PriorityQueue<T>
         }
 
         (currentItem.NextItem, priorityQueueItem.NextItem) = (priorityQueueItem, currentItem.NextItem);
+
     }
 
     /// <summary>
