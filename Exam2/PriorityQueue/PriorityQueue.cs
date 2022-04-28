@@ -32,16 +32,10 @@ public class PriorityQueue<T>
 
         PriorityQueueItem<T> currentItem = this.head;
 
-        if (currentItem.NextItem == null || currentItem.Priority < priorityQueueItem.Priority)
+        if (currentItem.Priority < priorityQueueItem.Priority)
         {
-            if (currentItem.Priority < priorityQueueItem.Priority)
-            {
-                this.head = priorityQueueItem;
-                priorityQueueItem.NextItem = currentItem;
-                return;
-            }
-
-            currentItem.NextItem = priorityQueueItem;
+            this.head = priorityQueueItem;
+            priorityQueueItem.NextItem = currentItem;
             return;
         }
 
@@ -51,11 +45,10 @@ public class PriorityQueue<T>
         }
 
         (currentItem.NextItem, priorityQueueItem.NextItem) = (priorityQueueItem, currentItem.NextItem);
-
     }
 
     /// <summary>
-    /// Кemoves the element with the highest priority from the priority queue.
+    /// Removes the element with the highest priority from the priority queue.
     /// </summary>
     /// <returns>The value of the removed element.</returns>
     /// <exception cref="InvalidOperationException">throws if the queue is empty.</exception>
