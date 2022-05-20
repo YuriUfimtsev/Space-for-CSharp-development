@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Homework1\Burrows–WheelerTransform\Burrows–WheelerTransform.csproj" />
+    <ProjectReference Include="..\..\Homework2\Trie\Trie.csproj" />
+    <ProjectReference Include="..\LZW\LZW.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="LZW">
       <HintPath>..\LZW\bin\Debug\net6.0\LZW.dll</HintPath>
     </Reference>
