@@ -32,7 +32,7 @@ public class GameTests
             game.OnLeft(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (1, 1));
+        Assert.AreEqual((1, 1), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -45,7 +45,7 @@ public class GameTests
             game.OnLeft(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (2, 0));
+        Assert.AreEqual((2, 0), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -58,7 +58,7 @@ public class GameTests
             game.OnRight(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (1, 3));
+        Assert.AreEqual((1, 3), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -71,7 +71,7 @@ public class GameTests
             game.OnRight(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (2, 6));
+        Assert.AreEqual((2, 6), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -84,7 +84,7 @@ public class GameTests
             game.Up(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (1, 2));
+        Assert.AreEqual((1, 2), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -97,7 +97,7 @@ public class GameTests
             game.Up(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (0, 4));
+        Assert.AreEqual((0, 4), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -110,7 +110,7 @@ public class GameTests
             game.Down(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (2, 1));
+        Assert.AreEqual((2, 1), game.CurrentMatrixPosition);
     }
 
     [Test]
@@ -123,18 +123,20 @@ public class GameTests
             game.Down(this, EventArgs.Empty);
         }
 
-        Assert.AreEqual(game.CurrentMatrixPosition, (3, 3));
+        Assert.AreEqual((3, 3), game.CurrentMatrixPosition);
     }
 
     [Test]
     public void EmptyMapTest()
     {
-        Assert.Throws<InvalidDataException>(() => game.CreateMatrixFromFileMap(pathToEmptyMap));
+        Assert.Throws<InvalidDataException>(()
+            => game.CreateMatrixFromFileMap(pathToEmptyMap));
     }
 
     [Test]
     public void IncorrectMapTest()
     {
-        Assert.Throws<InvalidDataException>(() => game.CreateMatrixFromFileMap(pathToIncorrectMap));
+        Assert.Throws<InvalidDataException>(()
+            => game.CreateMatrixFromFileMap(pathToIncorrectMap));
     }
 }
