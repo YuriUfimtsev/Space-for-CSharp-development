@@ -22,8 +22,9 @@ public class UniqueListTests
         uniqueList.AddByPosition(1, 0);
         uniqueList.AddByPosition(3, 0);
         uniqueList.AddByPosition(4, 0);
-        Assert.IsTrue(uniqueList.GetElementFromHead() == 4
-            && uniqueList.Size == 3 && uniqueList.GetElementFromTail() == 1);
+        Assert.AreEqual(3, uniqueList.Size);
+        Assert.AreEqual(4, uniqueList.GetElementFromHead());
+        Assert.AreEqual(1, uniqueList.GetElementFromTail());
     }
 
     [Test]
@@ -56,6 +57,7 @@ public class UniqueListTests
         uniqueList.RemoveByPosition(2);
         uniqueList.RemoveByPosition(1);
         uniqueList.RemoveByPosition(0);
-        Assert.IsTrue(momentSize == 3 && uniqueList.Size == 0);
+        Assert.AreEqual(3, momentSize);
+        Assert.AreEqual(0, uniqueList.Size);
     }
 }

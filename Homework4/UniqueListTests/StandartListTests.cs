@@ -13,8 +13,9 @@ public class StandartListTests
         list.AddByPosition(18, 0);
         list.AddByPosition(20, 1);
         list.AddByPosition(30, 2);
-        Assert.IsTrue(list.Size == 3
-            && list.GetElementFromHead() == 18 && list.GetElementFromTail() == 30);
+        Assert.AreEqual(3, list.Size);
+        Assert.AreEqual(18, list.GetElementFromHead());
+        Assert.AreEqual(30, list.GetElementFromTail());
     }
 
     [Test]
@@ -25,8 +26,9 @@ public class StandartListTests
         list.AddByPosition(20, 1);
         list.AddByPosition(30, 0);
         list.AddByPosition(400, 0);
-        Assert.IsTrue(list.Size == 4
-            && list.GetElementFromHead() == 400 && list.GetElementFromTail() == 20);
+        Assert.AreEqual(4, list.Size);
+        Assert.AreEqual(400, list.GetElementFromHead());
+        Assert.AreEqual(20, list.GetElementFromTail());
     }
 
     [Test]
@@ -37,8 +39,9 @@ public class StandartListTests
         list.AddByPosition(20, 100);
         list.AddByPosition(30, 200);
         list.AddByPosition(400, -4);
-        Assert.IsTrue(list.Size == 4
-            && list.GetElementFromHead() == 400 && list.GetElementFromTail() == 30);
+        Assert.AreEqual(4, list.Size);
+        Assert.AreEqual(400, list.GetElementFromHead());
+        Assert.AreEqual(30, list.GetElementFromTail());
     }
 
     [Test]
@@ -50,8 +53,9 @@ public class StandartListTests
         list.AddByPosition(30, 200);
         list.RemoveByPosition(0);
         list.RemoveByPosition(1);
-        Assert.IsTrue(list.GetElementFromHead() == 20
-            && list.Size == 1 && list.GetElementFromTail() == 20);
+        Assert.AreEqual(1, list.Size);
+        Assert.AreEqual(20, list.GetElementFromHead());
+        Assert.AreEqual(20, list.GetElementFromTail());
     }
 
     [Test]
@@ -62,8 +66,9 @@ public class StandartListTests
         list.AddByPosition(20, 100);
         list.AddByPosition(30, 200);
         list.RemoveByPosition(1);
-        Assert.IsTrue(list.Size == 2 && list.GetElementFromHead() == 18
-            && list.GetElementFromTail() == 30);
+        Assert.AreEqual(2, list.Size);
+        Assert.AreEqual(18, list.GetElementFromHead());
+        Assert.AreEqual(30, list.GetElementFromTail());
     }
 
     [Test]
@@ -77,8 +82,9 @@ public class StandartListTests
         list.ChangeByPosition(-5, 80);
         list.ChangeByPosition(1, 2);
         list.ChangeByPosition(2, 0);
-        Assert.IsTrue(list.Size == 3 && list.GetElementFromHead() == 80
-            && list.GetElementFromTail() == 0);
+        Assert.AreEqual(3, list.Size);
+        Assert.AreEqual(80, list.GetElementFromHead());
+        Assert.AreEqual(0, list.GetElementFromTail());
     }
 
     [Test]

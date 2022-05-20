@@ -24,9 +24,7 @@ public class List<T>
     /// Gets size of the list.
     /// </summary>
     public int Size
-    {
-        get { return this.sizeOfList; }
-    }
+        => this.sizeOfList;
 
     /// <summary>
     /// Mehod adds element in list by position.
