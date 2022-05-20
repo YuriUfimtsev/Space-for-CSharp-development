@@ -72,7 +72,7 @@ public static class Program
 
         if (maxMatrixElement == int.MinValue)
         {
-            throw new IncorrectInputException();
+            throw new IncorrectInputException("IncorrectInput.");
         }
 
         var sizeOfMatrix = maxMatrixElement;
@@ -93,7 +93,7 @@ public static class Program
                         out secondNodeNumber);
                     if (!isParsingCorrect)
                     {
-                        throw new IncorrectInputException();
+                        throw new IncorrectInputException("Incorrect Input.");
                     }
 
                     ++arrayOfStringElementsIndex;

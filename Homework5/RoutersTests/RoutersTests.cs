@@ -74,7 +74,8 @@ public class RoutersTests
         var newGraph = new Graph();
         var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("..\\..\\..\\IncoherentTopologyTest.txt");
         var resultMatrix = new int[1, 1];
-        Assert.Throws<NotCoherentTopologyException>(() => resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix));
+        Assert.Throws<NotCoherentTopologyException>(()
+            => resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix));
         Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "..\\..\\..\\TemporaryNUnitResultFile.txt");
     }
 }

@@ -100,13 +100,13 @@ public class Graph
         {
             if (currentEdgesArrayIndex >= this.indexOfEdgesArray)
             {
-                throw new NotCoherentTopologyException();
+                throw new NotCoherentTopologyException("Not Coherent Topology.");
             }
 
             var currentListOfEdgesElement = listOfEdges.First;
             if (currentListOfEdgesElement == null)
             {
-                throw new NotCoherentTopologyException();
+                throw new NotCoherentTopologyException("Not Coherent Topology.");
             }
 
             while (!(listOfOptimalGraphNodes.Contains(currentListOfEdgesElement.Value.FirstNode)
@@ -114,7 +114,7 @@ public class Graph
             {
                 if (currentListOfEdgesElement.Next == null)
                 {
-                    throw new NotCoherentTopologyException();
+                    throw new NotCoherentTopologyException("Not Coherent Topology.");
                 }
 
                 currentListOfEdgesElement = currentListOfEdgesElement.Next;
