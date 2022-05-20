@@ -13,18 +13,18 @@ public class MapFilterFoldTests
     public void StandartMapTest()
     {
         var resultIntList = MapFilterFoldFunctions<int>.Map(intList, x => x * 2);
-        Assert.AreEqual(resultIntList, new List<int> { 2, 4, 6, 8, 10, 12 });
+        Assert.AreEqual(new List<int> { 2, 4, 6, 8, 10, 12 }, resultIntList);
         var resultStringList = MapFilterFoldFunctions<string>.Map(stringList, x => x += "k");
-        Assert.AreEqual(resultStringList, new List<string> { "ak", "bk", "ck", "aak", "abk" });
+        Assert.AreEqual(new List<string> { "ak", "bk", "ck", "aak", "abk" }, resultStringList);
     }
 
     [Test]
     public void StandartFilterTest()
     {
         var resultIntList = MapFilterFoldFunctions<int>.Filter(intList, x => x % 2 == 0);
-        Assert.AreEqual(resultIntList, new List<int> { 2, 4, 6 });
+        Assert.AreEqual(new List<int> { 2, 4, 6 }, resultIntList);
         var resultStringList = MapFilterFoldFunctions<string>.Filter(stringList, x => string.Equals(x, "a"));
-        Assert.AreEqual(resultStringList, new List<string> { "a" });
+        Assert.AreEqual(new List<string> { "a" }, resultStringList);
     }
 
     [Test]
@@ -33,8 +33,8 @@ public class MapFilterFoldTests
         var resultValue = 0;
         var resultString = string.Empty;
         resultValue = MapFilterFoldFunctions<int>.Fold(intList, 1, (acc, elem) => acc * elem);
-        Assert.AreEqual(resultValue, 720);
+        Assert.AreEqual(720, resultValue);
         resultString = MapFilterFoldFunctions<string>.Fold(stringList, resultString, (acc, elem) => acc += elem);
-        Assert.AreEqual(resultString, "abcaaab");
+        Assert.AreEqual("abcaaab", resultString);
     }
 }
