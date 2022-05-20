@@ -9,7 +9,7 @@ using NUnit.Framework;
 public class CalculatorTests
 {
     private static IEnumerable<TestCaseData> StackCalulator
-    => new TestCaseData[]
+        => new TestCaseData[]
     {
         new TestCaseData(new StackCalculator.StackCalculator(new StackCalculator.StackOnArray())),
         new TestCaseData(new StackCalculator.StackCalculator(new StackCalculator.StackOnList())),

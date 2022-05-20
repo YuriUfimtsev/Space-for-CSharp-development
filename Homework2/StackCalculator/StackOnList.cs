@@ -13,9 +13,7 @@ public class StackOnList : IStack
     /// Gets the size of stack.
     /// </summary>
     public int GetSize
-    {
-        get { return this.head.Size; }
-    }
+        => this.head.Size;
 
     /// <summary>
     /// Method adds the element in stack.
@@ -52,9 +50,7 @@ public class StackOnList : IStack
     /// </summary>
     /// <returns>true if stack is empty. Else false.</returns>
     public bool IsEmpty()
-    {
-        return this.head.NextElement == null;
-    }
+        => this.head.NextElement == null;
 
     /// <summary>
     /// Method view the last stack element, but don't pop it.
@@ -72,54 +68,10 @@ public class StackOnList : IStack
 
     private class StackElement
     {
-        private float value;
-        private StackElement? nextElement;
-        private int size;
+        public float Value { get; set; }
 
-        public StackElement()
-        {
-            this.value = 0;
-            this.nextElement = null;
-            this.size = 0;
-        }
+        public StackElement? NextElement { get; set; }
 
-        internal float Value
-        {
-            get
-            {
-                return this.value;
-            }
-
-            set
-            {
-                this.value = value;
-            }
-        }
-
-        internal StackElement? NextElement
-        {
-            get
-            {
-                return this.nextElement;
-            }
-
-            set
-            {
-                this.nextElement = value;
-            }
-        }
-
-        internal int Size
-        {
-            get
-            {
-                return this.size;
-            }
-
-            set
-            {
-                this.size = value;
-            }
-        }
+        public int Size { get; set; }
     }
 }

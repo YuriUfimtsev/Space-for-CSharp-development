@@ -3,7 +3,7 @@
 /// <summary>
 /// Class contains Main method.
 /// </summary>
-internal class Program // Text for commit
+internal class Program
 {
     private static void Main(string[] args)
     {

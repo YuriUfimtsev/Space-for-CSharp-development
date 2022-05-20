@@ -23,17 +23,13 @@ public class StackOnArray : IStack
     /// Gets the size of stack.
     /// </summary>
     public int GetSize
-    {
-        get { return this.indexOfArray; }
-    }
+        => this.indexOfArray;
 
     /// <summary>
     /// Gets the stack's array.
     /// </summary>
     internal float[] GetArrayWithElements
-    {
-        get { return this.arrayWithElements; }
-    }
+        => this.arrayWithElements;
 
     /// <summary>
     /// Method adds the element in stack.
@@ -72,9 +68,7 @@ public class StackOnArray : IStack
     /// </summary>
     /// <returns>true if stack is empty. Else false.</returns>
     public bool IsEmpty()
-    {
-        return this.indexOfArray == 0;
-    }
+        => this.indexOfArray == 0;
 
     /// <summary>
     /// Method view the last stack element, but don't pop it.
