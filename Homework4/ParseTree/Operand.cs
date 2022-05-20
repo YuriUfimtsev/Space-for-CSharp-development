@@ -15,9 +15,16 @@ public class Operand : INode
         get { return this.number; } set { this.number = value; }
     }
 
+    /// <summary>
+    /// Method prints the node's content to console.
+    /// </summary>
     public void Print()
         => Console.Write($"{this.number} ");
 
+    /// <summary>
+    /// Method calculates the node's value.
+    /// </summary>
+    /// <returns>result of calculation.</returns>
     public int Eval()
         => this.number;
 }

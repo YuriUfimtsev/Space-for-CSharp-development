@@ -13,7 +13,7 @@ namespace ParseTreeTests
             ParseTree.ParseTree parseTree = new();
             var indexForParseTreeCreation = -1;
             INode? newTree = parseTree.CreateNewNodeForParseTree(prefixSequence, ref indexForParseTreeCreation);
-            parseTree.Eval(newTree);
+            parseTree.Eval(newTree!);
             Assert.IsTrue(parseTree.Eval(newTree!) == 30);
         }
 
@@ -24,7 +24,7 @@ namespace ParseTreeTests
             ParseTree.ParseTree parseTree = new();
             var indexForParseTreeCreation = -1;
             INode? newTree = parseTree.CreateNewNodeForParseTree(prefixSequence, ref indexForParseTreeCreation);
-            parseTree.Eval(newTree);
+            parseTree.Eval(newTree!);
             Assert.IsTrue(parseTree.Eval(newTree!) == 504);
         }
 
@@ -35,7 +35,7 @@ namespace ParseTreeTests
             ParseTree.ParseTree parseTree = new();
             var indexForParseTreeCreation = -1;
             INode? newTree = parseTree.CreateNewNodeForParseTree(prefixSequence, ref indexForParseTreeCreation);
-            Assert.Throws<System.ArgumentException>(() => parseTree.Eval(newTree));
+            Assert.Throws<System.ArgumentException>(() => parseTree.Eval(newTree!));
         }
     }
 }

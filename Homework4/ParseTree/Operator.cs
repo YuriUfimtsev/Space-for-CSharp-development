@@ -7,7 +7,6 @@ public abstract class Operator : INode
 {
     private INode? rightChild;
     private INode? leftChild;
-    private char nodeOperator;
 
     /// <summary>
     /// Gets or sets the RightChild for node.
@@ -25,7 +24,14 @@ public abstract class Operator : INode
         get { return this.leftChild; } set { this.leftChild = value; }
     }
 
+    /// <summary>
+    /// Method prints the node's content to console.
+    /// </summary>
     public abstract void Print();
 
+    /// <summary>
+    /// Method calculates the node's value.
+    /// </summary>
+    /// <returns>result of calculation.</returns>
     public abstract int Eval();
 }

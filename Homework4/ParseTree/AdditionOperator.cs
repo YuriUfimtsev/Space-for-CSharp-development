@@ -5,6 +5,10 @@
 /// </summary>
 public class AdditionOperator : Operator
 {
+    /// <summary>
+    /// Method calculates the node's value.
+    /// </summary>
+    /// <returns>result of calculation.</returns>
     public override int Eval()
     {
         if (this.LeftChild == null || this.RightChild == null)
@@ -15,6 +19,9 @@ public class AdditionOperator : Operator
         return this.LeftChild.Eval() + this.RightChild.Eval();
     }
 
+    /// <summary>
+    /// Method prints the node's content to console.
+    /// </summary>
     public override void Print()
     {
         if (this.LeftChild == null || this.RightChild == null)
