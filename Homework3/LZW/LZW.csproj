@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Homework1\Burrows–WheelerTransform\Burrows–WheelerTransform.csproj" />
-    <ProjectReference Include="..\..\Homework2\Trie\Trie.csproj" />
   </ItemGroup>
 
   <ItemGroup>

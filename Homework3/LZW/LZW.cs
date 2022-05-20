@@ -1,5 +1,4 @@
 ﻿namespace LZW;
-
 using System.Collections;
 
 /// <summary>
