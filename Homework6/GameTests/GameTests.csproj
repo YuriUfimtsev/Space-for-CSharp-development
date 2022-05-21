@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <BaseOutputPath></BaseOutputPath>
+
+    <BaseIntermediateOutputPath />
   </PropertyGroup>
 
   <ItemGroup>

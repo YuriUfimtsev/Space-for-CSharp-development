@@ -10,9 +10,9 @@ public class GameTests
     readonly EventLoop eventLoop = new();
     readonly Game.Game game = new();
 
-    readonly string pathToStandartMap = "..\\..\\..\\StandartMap.txt";
-    readonly string pathToEmptyMap = "..\\..\\..\\EmptyMap.txt";
-    readonly string pathToIncorrectMap = "..\\..\\..\\IncorrectMap.txt";
+    readonly string pathToStandartMap = "../../../StandartMap.txt";
+    readonly string pathToEmptyMap = "../../../EmptyMap.txt";
+    readonly string pathToIncorrectMap = "../../../IncorrectMap.txt";
 
     [Test]
     public void StartCursorTest()
