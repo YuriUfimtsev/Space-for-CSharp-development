@@ -3,7 +3,7 @@
 var eventLoop = new EventLoop();
 var game = new Game.Game();
 
-var pathToFile = "..\\..\\..\\Map.txt";
+var pathToFile = "../../../Map.txt";
 
 try
 {
