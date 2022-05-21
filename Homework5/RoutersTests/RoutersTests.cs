@@ -37,11 +37,11 @@ public class RoutersTests
     public void BigStandartTest()
     {
         var newGraph = new Graph();
-        var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("..\\..\\..\\BigStandartTest.txt");
+        var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("../../../BigStandartTest.txt");
         var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
-        Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "..\\..\\..\\TemporaryNUnitResultFile.txt");
-        var correctBytesArray = File.ReadAllBytes("..\\..\\..\\BigStandartTestResult.txt");
-        var currentBytesArray = File.ReadAllBytes("..\\..\\..\\TemporaryNUnitResultFile.txt");
+        Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "../../../TemporaryNUnitResultFile.txt");
+        var correctBytesArray = File.ReadAllBytes("../../../BigStandartTestResult.txt");
+        var currentBytesArray = File.ReadAllBytes("../../../TemporaryNUnitResultFile.txt");
         if (correctBytesArray.Length - 3 != currentBytesArray.Length)
         {
             Assert.Fail();
@@ -65,17 +65,17 @@ public class RoutersTests
     {
         var adjacencyMatrix = new int[1, 1];
         Assert.Throws<IncorrectInputException>(()
-            => adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("..\\..\\..\\EmptyFile.txt"));
+            => adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("../../../EmptyFile.txt"));
     }
 
     [Test]
     public void IncoherentTopolyTest()
     {
         var newGraph = new Graph();
-        var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("..\\..\\..\\IncoherentTopologyTest.txt");
+        var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("../../../IncoherentTopologyTest.txt");
         var resultMatrix = new int[1, 1];
         Assert.Throws<NotCoherentTopologyException>(()
             => resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix));
-        Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "..\\..\\..\\TemporaryNUnitResultFile.txt");
+        Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "../../../TemporaryNUnitResultFile.txt");
     }
 }
