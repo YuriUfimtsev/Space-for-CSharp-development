@@ -5,7 +5,7 @@ using Game;
 
 namespace GameTests;
 
-public class GameTests
+public class GameTests //Text For CI
 {
     readonly EventLoop eventLoop = new();
     readonly Game.Game game = new();
