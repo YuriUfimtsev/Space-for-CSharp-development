@@ -10,7 +10,7 @@ public class GameTests //Text For CI
     readonly EventLoop eventLoop = new();
     readonly Game.Game game = new();
 
-    readonly string pathToStandartMap = "GameTests\\..\\..\\..\\StandartMap.txt";
+    readonly string pathToStandartMap = "..\\GameTests\\..\\..\\..\\StandartMap.txt";
     readonly string pathToEmptyMap = "..\\GameTests\\..\\..\\..\\EmptyMap.txt";
     readonly string pathToIncorrectMap = "..\\GameTests\\..\\..\\..\\IncorrectMap.txt";
 
