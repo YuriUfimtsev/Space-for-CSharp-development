@@ -10,11 +10,11 @@ public class RoutersTests
     public void StandartExampleFromTaskTest()
     {
         var newGraph = new Graph();
-        var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("..\\..\\..\\StandartExampleTest.txt");
+        var adjacencyMatrix = Program.CreateAdjacencyMatrixFromFileData("../../../StandartExampleTest.txt");
         var resultMatrix = newGraph.GetResultAdjacencyMatrix(adjacencyMatrix);
-        Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "..\\..\\..\\TemporaryNUnitResultFile.txt");
-        var correctBytesArray = File.ReadAllBytes("..\\..\\..\\StandartExampleTestResult.txt");
-        var currentBytesArray = File.ReadAllBytes("..\\..\\..\\TemporaryNUnitResultFile.txt");
+        Program.FillResultFileFromAdjacencyMatrix(resultMatrix, "../../../TemporaryNUnitResultFile.txt");
+        var correctBytesArray = File.ReadAllBytes("../../../StandartExampleTestResult.txt");
+        var currentBytesArray = File.ReadAllBytes("../../../TemporaryNUnitResultFile.txt");
         if (correctBytesArray.Length - 3 != currentBytesArray.Length)
         {
             Assert.Fail();
