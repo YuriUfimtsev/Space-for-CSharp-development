@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
@@ -17,7 +11,6 @@ namespace Clock
         {
             InitializeComponent();
             graphics = CreateGraphics();
-            timer = new Timer();
             circle = new Rectangle(0, 0, 250, 250);
             penForRectangle = new Pen(Color.Black, 2);
             hourHand = new Pen(Color.Black, 3);
@@ -28,13 +21,12 @@ namespace Clock
             secondHand.CustomEndCap = new AdjustableArrowCap(3, 3);
         }
 
-        Graphics graphics;
-        Timer timer;
-        Pen hourHand;
-        Pen minuteHand;
-        Pen secondHand;
-        Rectangle circle;
-        Pen penForRectangle;
+        private Graphics graphics;
+        private Pen hourHand;
+        private Pen minuteHand;
+        private Pen secondHand;
+        private Rectangle circle;
+        private Pen penForRectangle;
 
         private void ClockPaint(object sender, PaintEventArgs e)
         {
