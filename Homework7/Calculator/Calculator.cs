@@ -34,10 +34,7 @@ public class Calculator
     /// </summary>
     public int CalculationResult
     {
-        get
-        {
-            return this.calculationResult;
-        }
+        get => this.calculationResult;
 
         set
         {

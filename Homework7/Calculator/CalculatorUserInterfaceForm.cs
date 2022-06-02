@@ -26,62 +26,132 @@ public partial class CalculatorUserInterfaceForm : Form
 
     private void ZeroClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('0');
-        this.WindowWithCalculation.Text += "0";
+        try
+        {
+            this.calculator.Calculate('0');
+            this.WindowWithCalculation.Text += "0";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void OneClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('1');
-        this.WindowWithCalculation.Text += "1";
+        try
+        {
+            this.calculator.Calculate('1');
+            this.WindowWithCalculation.Text += "1";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void TwoClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('2');
-        this.WindowWithCalculation.Text += "2";
+        try
+        {
+            this.calculator.Calculate('2');
+            this.WindowWithCalculation.Text += "2";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void ThreeClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('3');
-        this.WindowWithCalculation.Text += "3";
+        try
+        {
+            this.calculator.Calculate('3');
+            this.WindowWithCalculation.Text += "3";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void FourClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('4');
-        this.WindowWithCalculation.Text += "4";
+        try
+        {
+            this.calculator.Calculate('4');
+            this.WindowWithCalculation.Text += "4";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void FiveClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('5');
-        this.WindowWithCalculation.Text += "5";
+        try
+        {
+            this.calculator.Calculate('5');
+            this.WindowWithCalculation.Text += "5";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void SixClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('6');
-        this.WindowWithCalculation.Text += "6";
+        try
+        {
+            this.calculator.Calculate('6');
+            this.WindowWithCalculation.Text += "6";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void SevenClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('7');
-        this.WindowWithCalculation.Text += "7";
+        try
+        {
+            this.calculator.Calculate('7');
+            this.WindowWithCalculation.Text += "7";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void EightClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('8');
-        this.WindowWithCalculation.Text += "8";
+        try
+        {
+            this.calculator.Calculate('8');
+            this.WindowWithCalculation.Text += "8";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void NineClick(object sender, EventArgs e)
     {
-        this.calculator.Calculate('9');
-        this.WindowWithCalculation.Text += "9";
+        try
+        {
+            this.calculator.Calculate('9');
+            this.WindowWithCalculation.Text += "9";
+        }
+        catch (InvalidOperationException)
+        {
+            this.WindowWithCalculation.Text = "Incorrect operation";
+        }
     }
 
     private void EqualityClick(object sender, EventArgs e)
