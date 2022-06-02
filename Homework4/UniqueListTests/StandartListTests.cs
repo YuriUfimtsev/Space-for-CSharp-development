@@ -1,9 +1,10 @@
-using NUnit.Framework;
 using UniqueListTests;
+namespace UniqueListTests;
+
+using NUnit.Framework;
 using System;
 using UniqueList;
 
-namespace UniqueListTests;
 public class StandartListTests
 {
     [Test]
@@ -91,6 +92,6 @@ public class StandartListTests
     public void RemoveFromEmptyListTest()
     {
         List<int> list = new();
-        Assert.Throws<IncorrectOperationException>(() => list.RemoveByPosition(0));
+        Assert.Throws<InvalidOperationException>(() => list.RemoveByPosition(0));
     }
 }

@@ -11,7 +11,7 @@ public class UniqueListTests
     {
         UniqueList<string> uniqueList = new();
         uniqueList.AddByPosition("ha", 0);
-        Assert.Throws<IncorrectOperationException>(() => uniqueList.AddByPosition("ha", 2));
+        Assert.Throws<InvalidOperationException>(() => uniqueList.AddByPosition("ha", 2));
     }
 
     [Test]
@@ -35,7 +35,7 @@ public class UniqueListTests
         uniqueList.AddByPosition(1, 0);
         uniqueList.AddByPosition(3, 1);
         uniqueList.AddByPosition(4, -5);
-        Assert.Throws<IncorrectOperationException>(() => uniqueList.ChangeByPosition(0, 3));
+        Assert.Throws<InvalidOperationException>(() => uniqueList.ChangeByPosition(0, 3));
     }
 
     [Test]
@@ -43,7 +43,7 @@ public class UniqueListTests
     public void RemovesElementFromEmptyUniqueListTest()
     {
         UniqueList<int> uniqueList = new();
-        Assert.Throws<IncorrectOperationException>(() => uniqueList.RemoveByPosition(0));
+        Assert.Throws<InvalidOperationException>(() => uniqueList.RemoveByPosition(0));
     }
 
     [Test]

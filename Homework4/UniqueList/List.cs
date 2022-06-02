@@ -6,19 +6,9 @@
 /// <typeparam name="T">Type for list values.</typeparam>
 public class List<T>
 {
-    private ListElement<T>? head;
-    private ListElement<T>? tail;
+    private ListElement? head;
+    private ListElement? tail;
     private int sizeOfList;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="List{T}"/> class.
-    /// </summary>
-    public List()
-    {
-        this.head = null;
-        this.tail = null;
-        this.sizeOfList = 0;
-    }
 
     /// <summary>
     /// Gets size of the list.
@@ -35,7 +25,7 @@ public class List<T>
     /// False if element has been added in incorrect position.</returns>
     public virtual bool AddByPosition(T value, int position)
     {
-        ListElement<T> newElement = new(value);
+        ListElement newElement = new(value);
         ++this.sizeOfList;
         if (this.head == null)
         {
@@ -53,20 +43,19 @@ public class List<T>
 
         if (position <= 0)
         {
-            ListElement<T> headElement = this.head;
+            ListElement headElement = this.head;
             newElement.Next = headElement;
             this.head = newElement;
             return true;
         }
 
-        ListElement<T> currentElement = this.head;
+        ListElement currentElement = this.head;
         for (int i = 0; i < position - 1; ++i)
         {
             currentElement = currentElement.Next!;
         }
 
         newElement.Next = currentElement.Next;
-        currentElement.Next = newElement;
         currentElement.Next = newElement;
         if (newElement.Next == null)
         {
@@ -82,12 +71,12 @@ public class List<T>
     /// <param name="position">position to element removing.</param>
     /// <returns> true if element has been removed by correct position.
     /// False if element has been removed by incorrect position.</returns>
-    /// <exception cref="IncorrectOperationException">throws exception if list is empty.</exception>
+    /// <exception cref="InvalidOperationException">throws exception if list is empty.</exception>
     public bool RemoveByPosition(int position)
     {
         if (this.head == null)
         {
-            throw new IncorrectOperationException("The list hasn't contained elements");
+            throw new InvalidOperationException("The list hasn't contained elements");
         }
 
         --this.sizeOfList;
@@ -104,7 +93,7 @@ public class List<T>
             return false;
         }
 
-        ListElement<T> currentElement = this.head;
+        ListElement currentElement = this.head;
         if (position > this.sizeOfList)
         {
             while (currentElement.Next!.Next != null)
@@ -154,7 +143,7 @@ public class List<T>
             this.tail!.Value = newValue;
         }
 
-        ListElement<T> currentElement = this.head;
+        ListElement currentElement = this.head;
         for (int i = 0; i < position; ++i)
         {
             currentElement = currentElement.Next!;
@@ -198,14 +187,14 @@ public class List<T>
     /// </summary>
     /// <param name="value">value for search in list.</param>
     /// <returns> count of same values and same value's position.</returns>
-    internal (int CountOfValues, int ValuePositionInList) HowManyValuesInList(T value)
+    public (int CountOfValues, int ValuePositionInList) HowManyValuesInList(T value)
     {
         if (this.head == null)
         {
             return (0, -1);
         }
 
-        ListElement<T> currentElement = this.head;
+        ListElement currentElement = this.head;
         int valuePositionInList = -1;
         int listElementsIndex = 0;
 
@@ -229,5 +218,32 @@ public class List<T>
         }
 
         return (frequencyOfOccurrence, valuePositionInList);
+    }
+
+    /// <summary>
+    /// Class realize structure ListElement for List class.
+    /// </summary>
+    /// <typeparam name="T">Type for ListElement values.</typeparam>
+    private class ListElement
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListElement"/> class.
+        /// </summary>
+        /// <param name="value">value for adding to ListElement.</param>
+        public ListElement(T value)
+        {
+            this.Value = value;
+            this.Next = null;
+        }
+
+        /// <summary>
+        /// Gets or sets ListElement's value.
+        /// </summary>
+        public T Value { get; set; }
+
+        /// <summary>
+        /// Gets or sets next element for current ListElement.
+        /// </summary>
+        public ListElement? Next { get; set; }
     }
 }

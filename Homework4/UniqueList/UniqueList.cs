@@ -20,7 +20,7 @@ public class UniqueList<T> : List<T>
         var (countOfSameValues, sameValuePosition) = this.HowManyValuesInList(value);
         if (countOfSameValues > 0)
         {
-            throw new IncorrectOperationException(
+            throw new InvalidOperationException(
                 "The list has already contained this element");
         }
 
@@ -32,7 +32,7 @@ public class UniqueList<T> : List<T>
     /// </summary>
     /// <param name="position">position to element changing.</param>
     /// <param name="value">newValue for changing.</param>
-    /// <exception cref="IncorrectOperationException">throws exception if
+    /// <exception cref="InvalidOperationException">throws exception if
     /// list has already contained this element.</exception>
     public override void ChangeByPosition(int position, T value)
     {
@@ -45,14 +45,14 @@ public class UniqueList<T> : List<T>
                 (countOfSameValues, sameValuePosition) = this.HowManyValuesInList(value);
                 if (countOfSameValues > 1)
                 {
-                    throw new IncorrectOperationException(
+                    throw new InvalidOperationException(
                         "The list has already contained this element");
                 }
 
                 return;
             }
 
-            throw new IncorrectOperationException(
+            throw new InvalidOperationException(
                     "The list has already contained this element");
         }
 
