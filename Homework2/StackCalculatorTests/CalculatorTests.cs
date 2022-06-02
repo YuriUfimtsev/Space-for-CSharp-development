@@ -19,7 +19,8 @@ public class CalculatorTests
     public void CalculateStandartCorrectPostfixSequence(StackCalculator.StackCalculator stackCalculator)
     {
         (float calculationResult, var isComputingCorrect) = stackCalculator.CalculateInPostfixForm("1 2 3 + *");
-        Assert.IsTrue(calculationResult == 5 && isComputingCorrect);
+        Assert.AreEqual(5, calculationResult);
+        Assert.IsTrue(isComputingCorrect);
     }
 
     [TestCaseSource(nameof(StackCalulator))]
@@ -33,7 +34,8 @@ public class CalculatorTests
     public void CalculatePostfixSequenceWithBigNumbers(StackCalculator.StackCalculator stackCalculator)
     {
         (float calculationResult, var isComputingCorrect) = stackCalculator.CalculateInPostfixForm("200 120 - 300 * 1234 +");
-        Assert.IsTrue(calculationResult == 25234 && isComputingCorrect);
+        Assert.AreEqual(25234, calculationResult);
+        Assert.IsTrue(isComputingCorrect);
     }
 
     [TestCaseSource(nameof(StackCalulator))]
@@ -47,13 +49,15 @@ public class CalculatorTests
     public void CalculationWithMyltiplicationByZero(StackCalculator.StackCalculator stackCalculator)
     {
         (float calculationResult, var isComputingCorrect) = stackCalculator.CalculateInPostfixForm("200 120 - 0 *");
-        Assert.IsTrue(calculationResult == 0 && isComputingCorrect);
+        Assert.AreEqual(0, calculationResult);
+        Assert.IsTrue(isComputingCorrect);
     }
 
     [TestCaseSource(nameof(StackCalulator))]
     public void CalculationWithFloatResult(StackCalculator.StackCalculator stackCalculator)
     {
         (float calculationResult, var isComputingCorrect) = stackCalculator.CalculateInPostfixForm("5 2 /");
-        Assert.IsTrue(calculationResult == 2.5F && isComputingCorrect);
+        Assert.AreEqual(2.5F, calculationResult);
+        Assert.IsTrue(isComputingCorrect);
     }
 }

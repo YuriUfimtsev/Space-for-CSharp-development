@@ -7,14 +7,14 @@ using System;
 /// </summary>
 public class StackCalculator
 {
-    private IStack? newStack;
+    private IStack stack;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="StackCalculator"/> class.
     /// </summary>
     /// <param name="stack">stack element for StackCalculator.</param>
     public StackCalculator(IStack stack)
-       => this.newStack = stack;
+       => this.stack = stack;
 
     /// <summary>
     /// Method calculate expression in postfix form and return result.
@@ -28,10 +28,10 @@ public class StackCalculator
         for (int i = 0; i < arrayOfNumbersAndOperators.Length; ++i)
         {
             if (arrayOfNumbersAndOperators[i] == "*" || arrayOfNumbersAndOperators[i] == "/"
-            || arrayOfNumbersAndOperators[i] == "+" || arrayOfNumbersAndOperators[i] == "-")
+                || arrayOfNumbersAndOperators[i] == "+" || arrayOfNumbersAndOperators[i] == "-")
             {
-                (var firstElement, checkOfCorrectWork) = this.newStack!.Pop();
-                (var secondElement, checkOfCorrectWork) = this.newStack.Pop();
+                (var firstElement, checkOfCorrectWork) = this.stack!.Pop();
+                (var secondElement, checkOfCorrectWork) = this.stack.Pop();
                 if (!checkOfCorrectWork)
                 {
                     return (0, false);
@@ -64,16 +64,16 @@ public class StackCalculator
                         break;
                 }
 
-                this.newStack.Push(middleResult);
+                this.stack.Push(middleResult);
             }
             else
             {
-                this.newStack!.Push(float.Parse(arrayOfNumbersAndOperators[i]));
+                this.stack!.Push(float.Parse(arrayOfNumbersAndOperators[i]));
             }
         }
 
-        (float finalResult, checkOfCorrectWork) = this.newStack!.Pop();
-        if (!this.newStack.IsEmpty() || !checkOfCorrectWork)
+        (float finalResult, checkOfCorrectWork) = this.stack!.Pop();
+        if (!this.stack.IsEmpty() || !checkOfCorrectWork)
         {
             return (0, false);
         }

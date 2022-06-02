@@ -21,9 +21,7 @@ public class StackOnList : IStack
     /// <param name="value">Element that you want to push.</param>
     public void Push(float value)
     {
-        StackElement newStackElement = new();
-        newStackElement.Value = value;
-        newStackElement.NextElement = this.head;
+        StackElement newStackElement = new(value, this.head);
         this.head = newStackElement;
         ++this.head.Size;
     }
@@ -57,17 +55,20 @@ public class StackOnList : IStack
     /// </summary>
     /// <returns>value from stack. Also true if stack is not empty. Else false.</returns>
     public (float ReturningValue, bool IsStackNotEmpty) Top()
-    {
-        if (this.head.NextElement == null)
-        {
-            return (0, false);
-        }
-
-        return (this.head.Value, true);
-    }
+        => this.head.NextElement == null ? (0, false) : (this.head.Value, true);
 
     private class StackElement
     {
+        public StackElement()
+        {
+        }
+
+        public StackElement(float value, StackElement nextElement)
+        {
+            this.Value = value;
+            this.NextElement = nextElement;
+        }
+
         public float Value { get; set; }
 
         public StackElement? NextElement { get; set; }

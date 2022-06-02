@@ -15,7 +15,6 @@ public class StackOnArray : IStack
     /// </summary>
     public StackOnArray()
     {
-        this.indexOfArray = 0;
         this.arrayWithElements = new float[10];
     }
 
@@ -24,12 +23,6 @@ public class StackOnArray : IStack
     /// </summary>
     public int Size
         => this.indexOfArray;
-
-    /// <summary>
-    /// Gets the stack's array.
-    /// </summary>
-    internal float[] GetArrayWithElements
-        => this.arrayWithElements;
 
     /// <summary>
     /// Method adds the element in stack.
@@ -58,7 +51,6 @@ public class StackOnArray : IStack
         }
 
         float value = this.arrayWithElements[this.indexOfArray - 1];
-        this.arrayWithElements[this.indexOfArray - 1] = 0;
         --this.indexOfArray;
         return (value, true);
     }

@@ -28,9 +28,10 @@ public class StacksTests
             (float stackValue, isStackNotEmpty) = stack.Pop();
             stackValues[i] = stackValue;
         }
-
-        Assert.IsTrue(stackValues[0] == 100 && stackValues[1] == 245
-            && stackValues[2] == 88 && isStackNotEmpty);
+        Assert.AreEqual(100, stackValues[0]);
+        Assert.AreEqual(245, stackValues[1]);
+        Assert.AreEqual(88, stackValues[2]);
+        Assert.IsTrue(isStackNotEmpty);
     }
 
     [TestCaseSource(nameof(Stacks))]
