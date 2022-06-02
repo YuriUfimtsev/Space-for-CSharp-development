@@ -39,7 +39,9 @@ namespace Trie.Tests
             trie.Add("jkjhkjk");
             trie.Add("sssd");
             trie.Add("CS103");
-            Assert.IsTrue(trie.Remove("sssd") && trie.Remove("CS103") && !trie.Remove("CS1003"));
+            Assert.IsTrue(trie.Remove("sssd"));
+            Assert.IsTrue(trie.Remove("CS103"));
+            Assert.IsFalse(trie.Remove("CS1003"));
         }
 
         [TestMethod]
@@ -48,7 +50,8 @@ namespace Trie.Tests
             trie.Add("jkjhkjk");
             trie.Add("sssd");
             trie.Add("CS103");
-            Assert.IsTrue(trie.Contain("sssd") && !trie.Contain("CS104"));
+            Assert.IsTrue(trie.Contain("sssd"));
+            Assert.IsFalse(trie.Contain("CS104"));
         }
 
         [TestMethod]
@@ -58,9 +61,9 @@ namespace Trie.Tests
             trie.Add("sssd");
             trie.Add("ssssm");
             trie.Add("koi8");
-            Assert.AreEqual(trie.HowManyStartsWithPrefix("s"), 3);
-            Assert.AreEqual(trie.HowManyStartsWithPrefix("ko"), 1);
-            Assert.AreEqual(trie.HowManyStartsWithPrefix("sss"), 2);
+            Assert.AreEqual(3, trie.HowManyStartsWithPrefix("s"));
+            Assert.AreEqual(1, trie.HowManyStartsWithPrefix("ko"));
+            Assert.AreEqual(2, trie.HowManyStartsWithPrefix("sss"));
         }
 
         [TestMethod]
@@ -71,7 +74,7 @@ namespace Trie.Tests
             trie.Add("pmpu");
             trie.Remove("sddd");
             trie.Remove("pmpu");
-            Assert.IsTrue(trie.Size == 1);
+            Assert.AreEqual(trie.Size, 1);
         }
 
         [TestMethod]

@@ -13,9 +13,7 @@ public class Trie
     /// Initializes a new instance of the <see cref="Trie"/> class.
     /// </summary>
     public Trie()
-    {
-        this.triePointer = this.head;
-    }
+        => this.triePointer = this.head;
 
     /// <summary>
     /// Gets the size of the TrieElement.
@@ -29,7 +27,7 @@ public class Trie
     /// <returns>True if the stringElement hasn't been previously consisted in Trie. Else false.</returns>
     public bool Add(string stringElement)
     {
-        if (stringElement == null || stringElement.Length == 0 || this.Contain(stringElement))
+        if (stringElement.Length == 0 || this.Contain(stringElement))
         {
             return false;
         }
@@ -39,11 +37,16 @@ public class Trie
         ++currentElement.SizeOfTrieElement;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
-            ++currentElement!.SizeOfTrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
+            if (currentElement == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            ++currentElement.SizeOfTrieElement;
             if (stringElementIndex == stringElement.Length - 1)
             {
-                if (!currentElement!.IsTerminal)
+                if (!currentElement.IsTerminal)
                 {
                     currentElement.IsTerminal = true;
                     return true;
@@ -65,7 +68,7 @@ public class Trie
     }
 
     /// <summary>
-    /// Method adds char type elment in Trie.
+    /// Method adds char type element in Trie.
     /// </summary>
     /// <param name="newElement">element to add.</param>
     public void AddWithPointer(char newElement)
@@ -96,7 +99,7 @@ public class Trie
     }
 
     /// <summary>
-    /// Method checks the element's existence in Trie.
+    /// Method checks the existence of an element in the Trie.
     /// </summary>
     /// <param name="stringElement">The string type element to check.</param>
     /// <returns>True if element contains in Trie. Else false.</returns>
@@ -156,10 +159,10 @@ public class Trie
     }
 
     /// <summary>
-    /// Method counts Trie's elements which start with current prefix.
+    /// Method counts the number of Trie elements that start with a given prefix.
     /// </summary>
     /// <param name="prefix">The string type element to check.</param>
-    /// <returns>Number of Trie's elements which start with prefix.</returns>
+    /// <returns>Number of Trie's elements which start with a given prefix.</returns>
     public int HowManyStartsWithPrefix(string prefix)
     {
         if (prefix.Length == 0 || prefix == null)
@@ -192,12 +195,7 @@ public class Trie
         /// Initializes a new instance of the <see cref="TrieElement"/> class.
         /// </summary>
         public TrieElement()
-        {
-            this.Vertexes = new Dictionary<char, TrieElement>();
-            this.SizeOfTrieElement = 0;
-            this.IsTerminal = false;
-            this.VertexValue = 0;
-        }
+            => this.Vertexes = new Dictionary<char, TrieElement>();
 
         /// <summary>
         /// Gets or sets the size of TrieElement.
