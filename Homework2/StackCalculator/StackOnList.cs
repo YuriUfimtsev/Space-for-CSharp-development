@@ -12,7 +12,7 @@ public class StackOnList : IStack
     /// <summary>
     /// Gets the size of stack.
     /// </summary>
-    public int GetSize
+    public int Size
         => this.head.Size;
 
     /// <summary>

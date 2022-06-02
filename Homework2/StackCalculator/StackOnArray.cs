@@ -22,7 +22,7 @@ public class StackOnArray : IStack
     /// <summary>
     /// Gets the size of stack.
     /// </summary>
-    public int GetSize
+    public int Size
         => this.indexOfArray;
 
     /// <summary>

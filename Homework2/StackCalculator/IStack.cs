@@ -8,7 +8,7 @@ public interface IStack
     /// <summary>
     /// Gets the size of stack.
     /// </summary>
-    public int GetSize { get; }
+    public int Size { get; }
 
     /// <summary>
     /// Method adds the element in stack.
