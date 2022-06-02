@@ -40,7 +40,7 @@ public class Trie
             currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
             if (currentElement == null)
             {
-                throw new ArgumentNullException();
+                throw new InvalidOperationException();
             }
 
             ++currentElement.SizeOfTrieElement;
@@ -59,7 +59,7 @@ public class Trie
         while (currentElement != null && stringElementIndex != stringElement.Length)
         {
             currentElement.Vertexes.Add(stringElement[stringElementIndex], new TrieElement());
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
             ++currentElement!.SizeOfTrieElement;
             ++stringElementIndex;
         }
@@ -76,7 +76,7 @@ public class Trie
         TrieElement? currentElement = this.triePointer;
         if (currentElement!.Vertexes.ContainsKey(newElement))
         {
-            currentElement = currentElement.Vertexes[newElement] as TrieElement;
+            currentElement = currentElement.Vertexes[newElement];
             if (!currentElement!.IsTerminal)
             {
                 currentElement!.IsTerminal = true;
@@ -90,7 +90,7 @@ public class Trie
         }
 
         currentElement.Vertexes[newElement] = new TrieElement();
-        currentElement = currentElement.Vertexes[newElement] as TrieElement;
+        currentElement = currentElement.Vertexes[newElement];
         currentElement!.IsTerminal = true;
         ++currentElement.SizeOfTrieElement;
         ++this.head.SizeOfTrieElement;
@@ -105,7 +105,7 @@ public class Trie
     /// <returns>True if element contains in Trie. Else false.</returns>
     public bool Contain(string stringElement)
     {
-        if (stringElement.Length == 0 || stringElement == null)
+        if (stringElement.Length == 0)
         {
             return false;
         }
@@ -114,7 +114,7 @@ public class Trie
         TrieElement? currentElement = this.head;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
             if (stringElementIndex == stringElement.Length - 1)
             {
                 return currentElement!.IsTerminal;
@@ -133,7 +133,7 @@ public class Trie
     /// <returns>True if element has been contained in the Trie. Else false.</returns>
     public bool Remove(string stringElement)
     {
-        if (!this.Contain(stringElement) || stringElement.Length == 0 || stringElement == null)
+        if (!this.Contain(stringElement) || stringElement.Length == 0)
         {
             return false;
         }
@@ -144,7 +144,7 @@ public class Trie
         while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
             --currentElement.SizeOfTrieElement;
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
 
             if (stringElementIndex == stringElement.Length - 1)
             {
@@ -174,7 +174,7 @@ public class Trie
         TrieElement? currentElement = this.head;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(prefix[prefixIndex]))
         {
-            currentElement = currentElement.Vertexes[prefix[prefixIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[prefix[prefixIndex]];
             if (prefixIndex == prefix.Length - 1)
             {
                 return currentElement!.SizeOfTrieElement;
