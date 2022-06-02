@@ -7,12 +7,12 @@ namespace GameTests;
 
 public class GameTests
 {
-    readonly EventLoop eventLoop = new();
-    readonly Game.Game game = new();
+    private readonly EventLoop eventLoop = new();
+    private readonly Game.Game game = new();
 
-    readonly string pathToStandartMap = "../../../StandartMap.txt";
-    readonly string pathToEmptyMap = "../../../EmptyMap.txt";
-    readonly string pathToIncorrectMap = "../../../IncorrectMap.txt";
+    private readonly string pathToStandartMap = "../../../StandartMap.txt";
+    private readonly string pathToEmptyMap = "../../../EmptyMap.txt";
+    private readonly string pathToIncorrectMap = "../../../IncorrectMap.txt";
 
     [Test]
     public void StartCursorTest()
