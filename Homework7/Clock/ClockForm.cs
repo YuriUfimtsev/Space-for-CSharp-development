@@ -44,7 +44,7 @@ namespace Clock
 
         private void SecondTimerTick(object sender, EventArgs e)
         {
-            graphics.Clear(Color.White);
+            //graphics.Clear(Color.White);
             graphics.DrawEllipse(penForRectangle, circle);
             graphics.DrawLine(hourHand, 125, 125,
                 125 + 90 * (float)Math.Sin(2 * Math.PI / 12 * (DateTime.Now.Hour % 12)),
