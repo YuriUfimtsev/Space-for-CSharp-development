@@ -6,33 +6,28 @@ using System.Collections;
 /// </summary>
 public class Trie
 {
-    private TrieElement head = new();
-    private TrieElement? triePointer = new();
+    private readonly TrieElement head = new();
+    private TrieElement? triePointer;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Trie"/> class.
     /// </summary>
     public Trie()
-    {
-        this.triePointer = this.head;
-    }
+        => this.triePointer = this.head;
 
     /// <summary>
     /// Gets the size of the TrieElement.
     /// </summary>
-    public int Size
-    {
-        get { return this.head.SizeOfTrieElement; }
-    }
+    public int Size => this.head.SizeOfTrieElement;
 
     /// <summary>
     /// Method adds the element into Trie.
     /// </summary>
-    /// <param name="stringElement">The string type element to adding.</param>
+    /// <param name="stringElement">The string type element to add.</param>
     /// <returns>True if the stringElement hasn't been previously consisted in Trie. Else false.</returns>
     public bool Add(string stringElement)
     {
-        if (this.Contains(stringElement) || stringElement.Length == 0 || stringElement == null)
+        if (stringElement.Length == 0 || this.Contain(stringElement))
         {
             return false;
         }
@@ -42,13 +37,19 @@ public class Trie
         ++currentElement.SizeOfTrieElement;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
-            ++currentElement!.SizeOfTrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
+            if (currentElement == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            ++currentElement.SizeOfTrieElement;
             if (stringElementIndex == stringElement.Length - 1)
             {
-                if (!currentElement!.IsTerminal)
+                if (!currentElement.IsTerminal)
                 {
-                    return currentElement.IsTerminal = true;
+                    currentElement.IsTerminal = true;
+                    return true;
                 }
             }
 
@@ -58,7 +59,7 @@ public class Trie
         while (currentElement != null && stringElementIndex != stringElement.Length)
         {
             currentElement.Vertexes.Add(stringElement[stringElementIndex], new TrieElement());
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
             ++currentElement!.SizeOfTrieElement;
             ++stringElementIndex;
         }
@@ -67,49 +68,44 @@ public class Trie
     }
 
     /// <summary>
-    /// Method adds symbols in Trie. Or finds them in Trie.
+    /// Method adds char type element in Trie.
     /// </summary>
-    /// <param name="newElement">Element that you want to add in Trie.</param>
-    /// <returns>true if newElement has been found in Trie. Else false.
-    /// Also return vertex value (number).</returns>
-    public (bool IsElementInTrie, int VertexValue) AddWithPointer(char newElement)
+    /// <param name="newElement">element to add.</param>
+    public void AddWithPointer(char newElement)
     {
         TrieElement? currentElement = this.triePointer;
-        if (currentElement!.Vertexes.ContainsKey(newElement) && currentElement.Vertexes[newElement] != null)
+        if (currentElement!.Vertexes.ContainsKey(newElement))
         {
-            currentElement = currentElement.Vertexes[newElement] as TrieElement;
+            currentElement = currentElement.Vertexes[newElement];
             if (!currentElement!.IsTerminal)
             {
                 currentElement!.IsTerminal = true;
                 ++currentElement.SizeOfTrieElement;
                 ++this.head.SizeOfTrieElement;
-                currentElement.VertexValue = this.head.SizeOfTrieElement - 1;
+                currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
                 this.triePointer = this.head;
-                return (false, currentElement.VertexValue);
             }
 
-            this.triePointer = (TrieElement?)currentElement;
-            return (true, currentElement.VertexValue);
+            this.triePointer = (TrieElement?)currentElement.Vertexes[newElement];
         }
 
         currentElement.Vertexes[newElement] = new TrieElement();
-        currentElement = currentElement.Vertexes[newElement] as TrieElement;
+        currentElement = currentElement.Vertexes[newElement];
         currentElement!.IsTerminal = true;
         ++currentElement.SizeOfTrieElement;
         ++this.head.SizeOfTrieElement;
-        currentElement.VertexValue = this.head.SizeOfTrieElement - 1;
+        currentElement.VertexValue = this.head.SizeOfTrieElement + 255;
         this.triePointer = this.head;
-        return (false, currentElement.VertexValue);
     }
 
     /// <summary>
-    /// Method checks the element's existence in Trie.
+    /// Method checks the existence of an element in the Trie.
     /// </summary>
     /// <param name="stringElement">The string type element to check.</param>
     /// <returns>True if element contains in Trie. Else false.</returns>
-    public bool Contains(string stringElement)
+    public bool Contain(string stringElement)
     {
-        if (stringElement.Length == 0 || stringElement == null)
+        if (stringElement.Length == 0)
         {
             return false;
         }
@@ -118,7 +114,7 @@ public class Trie
         TrieElement? currentElement = this.head;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
             if (stringElementIndex == stringElement.Length - 1)
             {
                 return currentElement!.IsTerminal;
@@ -133,11 +129,11 @@ public class Trie
     /// <summary>
     /// Method removes the element from the Trie.
     /// </summary>
-    /// <param name="stringElement">The string type element to removing.</param>
+    /// <param name="stringElement">The string type element to remove.</param>
     /// <returns>True if element has been contained in the Trie. Else false.</returns>
     public bool Remove(string stringElement)
     {
-        if (!this.Contains(stringElement) || stringElement.Length == 0 || stringElement == null)
+        if (!this.Contain(stringElement) || stringElement.Length == 0)
         {
             return false;
         }
@@ -145,15 +141,10 @@ public class Trie
         var stringElementIndex = 0;
         TrieElement? currentElement = this.head;
 
-        var elementWithLastTermainalPointer = currentElement.Vertexes[stringElement[0]] as TrieElement;
-        while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
+while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
             --currentElement.SizeOfTrieElement;
-            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]] as TrieElement;
-            if (currentElement!.IsTerminal)
-            {
-                elementWithLastTermainalPointer = currentElement;
-            }
+            currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
 
             if (stringElementIndex == stringElement.Length - 1)
             {
@@ -168,10 +159,10 @@ public class Trie
     }
 
     /// <summary>
-    /// Method counts Trie's elements which start with current prefix.
+    /// Method counts the number of Trie elements that start with a given prefix.
     /// </summary>
     /// <param name="prefix">The string type element to check.</param>
-    /// <returns>Number of Trie's elements which start with prefix.</returns>
+    /// <returns>Number of Trie's elements which start with a given prefix.</returns>
     public int HowManyStartsWithPrefix(string prefix)
     {
         if (prefix.Length == 0 || prefix == null)
@@ -183,7 +174,7 @@ public class Trie
         TrieElement? currentElement = this.head;
         while (currentElement != null && currentElement.Vertexes.ContainsKey(prefix[prefixIndex]))
         {
-            currentElement = currentElement.Vertexes[prefix[prefixIndex]] as TrieElement;
+            currentElement = currentElement.Vertexes[prefix[prefixIndex]];
             if (prefixIndex == prefix.Length - 1)
             {
                 return currentElement!.SizeOfTrieElement;
@@ -198,76 +189,29 @@ public class Trie
     /// <summary>
     /// Nested class. Presents the elements of "Trie" class.
     /// </summary>
-    public class TrieElement
+    private class TrieElement
     {
-        private int sizeOfTrieElement = 0;
-        private bool isTerminal = false;
-        private Hashtable vertexes;
-        private int vertexValue = 0;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TrieElement"/> class.
         /// </summary>
         public TrieElement()
-        {
-            this.vertexes = new Hashtable();
-        }
+            => this.Vertexes = new Dictionary<char, TrieElement>();
 
         /// <summary>
         /// Gets or sets the size of TrieElement.
         /// </summary>
-        internal int SizeOfTrieElement
-        {
-            get
-            {
-                return this.sizeOfTrieElement;
-            }
-
-            set
-            {
-                this.sizeOfTrieElement = value;
-            }
-        }
+        public int SizeOfTrieElement { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether is this element terminal.
         /// </summary>
-        internal bool IsTerminal
-        {
-            get
-            {
-                return this.isTerminal;
-            }
-
-            set
-            {
-                this.isTerminal = value;
-            }
-        }
+        public bool IsTerminal { get; set; }
 
         /// <summary>
         /// Gets or sets a hashtable of vertexes.
         /// </summary>
-        internal Hashtable Vertexes
-        {
-            get
-            {
-                return this.vertexes;
-            }
+        public Dictionary<char, TrieElement> Vertexes { get; set; }
 
-            set
-            {
-                this.vertexes = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a number (value) of vertex.
-        /// </summary>
-        internal int VertexValue
-        {
-            get { return this.vertexValue; }
-            set { this.vertexValue = value; }
-        }
+        public int VertexValue { get; set; }
     }
 }
