@@ -29,7 +29,7 @@ internal class TestsForBWT
         var (directTransformedString, directEndStringPosition) = BurrowsWheelerTransform.DirectBWT(stringForBWT);
         var reverseTransformedString = BurrowsWheelerTransform.ReverseBWT(directTransformedString, directEndStringPosition);
         return string.Compare(directTransformedString, "cccrrraaa") == 0
-            && string.Compare(reverseTransformedString, stringForBWT) == 0 && directEndStringPosition == 5;
+            && string.Compare(reverseTransformedString, stringForBWT) == 0 && directEndStringPosition == 3;
     }
 
     private static bool TestWithOneSymbol()
