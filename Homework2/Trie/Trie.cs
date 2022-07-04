@@ -141,7 +141,7 @@ public class Trie
         var stringElementIndex = 0;
         TrieElement? currentElement = this.head;
 
-        while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
+while (currentElement != null && currentElement.Vertexes.ContainsKey(stringElement[stringElementIndex]))
         {
             --currentElement.SizeOfTrieElement;
             currentElement = currentElement.Vertexes[stringElement[stringElementIndex]];
